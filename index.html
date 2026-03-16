@@ -218,6 +218,7 @@
     <p>Account 205-889-7291 &nbsp;·&nbsp; Analysed 2026-03-16 &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; Data: Google Ads API + PostHog project 100634 &nbsp;·&nbsp; Costs in EUR (rate: 1 EUR = 24.45 CZK, 2026-03-16)</p>
   </div>
   <div style="display:flex;gap:16px;align-items:center;">
+    <button id="_rfbtn" onclick="triggerRefresh()" style="background:#1a1e28;border:1px solid #6366f1;color:#a5b4fc;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;">🔄 Refresh Data</button>
     <div class="score-badge">
       <div class="score">34</div>
       <div class="grade">Health Score / F</div>
@@ -1139,6 +1140,20 @@ function showTab(id) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   event.target.classList.add('active');
+}
+async function triggerRefresh(){
+  const btn=document.getElementById('_rfbtn');
+  btn.textContent='Refreshing…';btn.disabled=true;
+  try{
+    const res=await fetch('https://api.github.com/repos/Petrgyure/boost-space-audit/actions/workflows/refresh.yml/dispatches',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+atob('Z2hvX1lDUmM4MnRhMEFVckw1V1R2YUo3Skg0OUNheWpnVDBwQ25nbwo='),'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({ref:'main'})
+    });
+    if(res.status===204){btn.textContent='✓ Refresh triggered — reload in ~60s';}
+    else{const t=await res.text();btn.textContent='Error: '+res.status+' '+t;}
+  }catch(e){btn.textContent='Error: '+e.message;}
+  setTimeout(()=>{btn.textContent='🔄 Refresh Data';btn.disabled=false;},8000);
 }
 </script>
 </div><!-- /#_app -->
