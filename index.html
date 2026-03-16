@@ -268,11 +268,11 @@
       <p>Top search terms include "seona ai" (€102), "seo with ai" (€108), "alli ai", "tradewheel", "tradelle", "sellvia app" — none of these are Boost.space buyers. Broad/phrase match expanding into wrong intent territory.</p>
     </div>
   </div>
-  <div class="alert alert-critical">
-    <div class="alert-icon">🔴</div>
+  <div class="alert alert-warning">
+    <div class="alert-icon">🟡</div>
     <div class="alert-body">
-      <strong>Demo booking conversion REMOVED — 35 demos/month not tracked in Google Ads</strong>
-      <p>The <code>lemcal_demo_meeting_booked</code> conversion action is REMOVED. PostHog records 35 demo bookings/month but 0 are attributed to Google Ads. Smart Bidding can't optimise for your most valuable action.</p>
+      <strong>Demo booking conversion renamed — verify Smart Bidding is optimising for DemoLeadFormSubmit</strong>
+      <p>The conversion action was renamed from <code>lemcal_demo_meeting_booked</code> to <code>DemoLeadFormSubmit</code>. Confirm it is set as a <strong>primary conversion</strong> in Google Ads and that Smart Bidding targets are updated to use it. PostHog records 35 demo bookings/month — ensure all are attributed.</p>
     </div>
   </div>
   <div class="alert alert-warning">
@@ -709,7 +709,7 @@
           <div class="bar-wrap" style="height:10px"><div class="bar-fill bar-blue" style="width:9.2%"></div></div>
         </div>
         <div style="margin-bottom:20px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="text-red" style="font-size:13px">demo_meeting_booked ❌ GCLID not persisted</span><span style="font-size:13px;font-weight:600;color:var(--red)">0 / 35</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="text-yellow" style="font-size:13px">DemoLeadFormSubmit ⚠️ verify GCLID persistence</span><span style="font-size:13px;font-weight:600;color:var(--yellow)">? / 35</span></div>
           <div class="bar-wrap" style="height:10px"><div class="bar-fill bar-red" style="width:0%"></div></div>
         </div>
         <div style="margin-bottom:20px">
@@ -837,17 +837,17 @@ SelectSignUpStartingPoint   → €2.04   (set included = YES first)</div>
     <div class="step step-critical">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h4>Re-create Demo Booking Conversion Action</h4>
-        <p>lemcal_demo_meeting_booked was REMOVED. 35 demos/month untracked = Smart Bidding ignores your most valuable action. Re-create via Google Tag or Calendly webhook → GCLID upload.</p>
-        <div class="step-code">Option A (Fastest): Google Tag Manager
-Trigger: URL contains /booking-confirmed OR calendly.com/event_scheduled
-GA4 event: demo_meeting_booked → Import to Google Ads as conversion
-
-Option B (Most accurate): Offline Conversion Import
-Store GCLID in your CRM at form submission
-Upload gclid + conversion_time + conversion_value to Google Ads
-via Google Ads API or manual CSV upload weekly</div>
-        <div class="step-meta"><span class="step-tag tag-time">⏱ 1–4 hours</span><span class="step-tag tag-impact">🎯 Critical — 35 demos/mo untracked</span></div>
+        <h4>Verify DemoLeadFormSubmit Conversion Action</h4>
+        <p>Conversion renamed from <code>lemcal_demo_meeting_booked</code> to <code>DemoLeadFormSubmit</code>. Confirm it is set as a <strong>primary conversion</strong>, has a conversion value assigned, and Smart Bidding targets reference it. Also ensure GCLID is persisted across sessions so multi-touch demos are attributed.</p>
+        <div class="step-code">Checklist:
+1. Google Ads → Goals → Conversions → DemoLeadFormSubmit
+   - Status: Active ✓
+   - Category: Primary (not Secondary)
+   - Conversion value: set (e.g. €500 per demo)
+2. All active campaigns use Target CPA or tROAS with DemoLeadFormSubmit as target
+3. GCLID 90-day cookie deployed on site for cross-session attribution
+4. PostHog DemoLeadFormSubmit events match Google Ads conversion count</div>
+        <div class="step-meta"><span class="step-tag tag-time">⏱ 30 min</span><span class="step-tag tag-impact">🎯 Critical — Smart Bidding signal quality</span></div>
       </div>
     </div>
   </div>
@@ -1117,7 +1117,7 @@ Create via: Google Ads → Tools → Audience Manager → Website Visitors</div>
       <div class="card-title">Critical Assumptions for This Model</div>
       <div class="budget-row"><div class="budget-label">✅ UTM tracking working</div><div class="budget-val text-green">Fixed</div></div>
       <div class="budget-row"><div class="budget-label">⚠️ GCLID 90-day cookie deployed</div><div class="budget-val text-yellow">Week 2</div></div>
-      <div class="budget-row"><div class="budget-label">⚠️ Demo booking conversion re-created</div><div class="budget-val text-yellow">Week 1</div></div>
+      <div class="budget-row"><div class="budget-label">✅ DemoLeadFormSubmit conversion active</div><div class="budget-val text-green">Done</div></div>
       <div class="budget-row"><div class="budget-label">⚠️ Landing pages improved (demo CTAs)</div><div class="budget-val text-yellow">Week 2–3</div></div>
       <div class="budget-row"><div class="budget-label">⚠️ Conversion values set in Google Ads</div><div class="budget-val text-yellow">Week 1</div></div>
       <div class="budget-row"><div class="budget-label">⚠️ Negative keywords blocking waste</div><div class="budget-val text-yellow">Week 1</div></div>
