@@ -79,6 +79,22 @@ function restoreDoneStates(){
     }
   });
 }
+
+/* ── Google Ads CSV download data ───────────────────────────────────────── */
+var NEG_CAMP_CSV  = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seona ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo with ai\",\"Negative Exact\"\n\"PIM | Commerce - Dynamic Pricing\",\"\",\"Excluded negative keywords\",\"price tracker\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradewheel\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"usestyle ai seona ai\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"sell raze\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai seo\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"alli ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"boost ai search\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradelle\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai search visibility tool\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"sellvia app\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradewheel website\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"profound ai seo\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradewheel app\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"auto seo with ai\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"crosslister\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"helium 10 tools\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"sellhub\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"neobund\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo and geo optimization\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seona\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"go to lister\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai automation\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai seo keyword generator\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"selleraider\",\"Negative Exact\"\n\"PIM | Commerce - Dynamic Pricing\",\"\",\"Excluded negative keywords\",\"price tracking\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo google ai\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai system\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"claude seo\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai for small business\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai automation software\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai tools for seo\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo ai agent\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"www tradewheel com\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai virtual agent\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo for ai search\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo for ai models\",\"Negative Exact\"\n\"Search | Technology | EN\",\"\",\"Excluded negative keywords\",\"ai infrastructure\",\"Negative Exact\"";
+var NEG_ACCT_CSV  = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai automation\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai automation software\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai for small business\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai infrastructure\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai search visibility tool\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai seo\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai seo keyword generator\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai system\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tools for seo\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai virtual agent\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"alli ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"auto seo with ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"boost ai search\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"claude seo\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"crosslister\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"go to lister\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"helium 10 tools\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"neobund\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"price tracker\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"price tracking\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"profound ai seo\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"sell raze\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"selleraider\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"sellhub\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"sellvia app\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo ai agent\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo and geo optimization\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo for ai models\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo for ai search\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo google ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo with ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seona\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seona ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradelle\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradewheel\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradewheel app\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradewheel website\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"usestyle ai seona ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"www tradewheel com\",\"Negative Exact\"";
+var ADD_KW_CSV    = "\"Campaign\",\"Ad Group\",\"Keyword\",\"Criterion Type\"";
+var CAMP_ACT_CSV  = "\"Campaign\",\"Vertical\",\"Use Case\",\"Action\",\"Reason\",\"30d Spend\",\"30d Conv\"\n\"PIM | Commerce - Dynamic Pricing\",\"Commerce\",\"Dynamic Pricing\",\"Pause\",\"0 conversions, significant spend\",\"\u20ac144\",\"0\"\n\"PIM | Commerce - Supplier Catalog\",\"Commerce\",\"Supplier Catalog\",\"Review\",\"0 conversions, review targeting\",\"\u20ac2.86\",\"0\"\n\"CDP | Marketing - Unified Customer Profiles\",\"Marketing\",\"Unified Customer Profiles\",\"Review\",\"0 conversions, review targeting\",\"\u20ac0.00\",\"0\"\n\"CDP | Marketing - Dynamic Segmentation\",\"Marketing\",\"Dynamic Segmentation\",\"Review\",\"0 conversions, review targeting\",\"\u20ac0.00\",\"0\"\n\"CDP | Marketing - Revenue Attribution\",\"Marketing\",\"Revenue Attribution\",\"Review\",\"0 conversions, review targeting\",\"\u20ac0.00\",\"0\"\n\"CDP | Marketing - AI Personalized Activation\",\"Marketing\",\"AI Personalized Activation\",\"Review\",\"0 conversions, review targeting\",\"\u20ac0.00\",\"0\"\n\"PIM | Commerce - Marketplace Expansion\",\"Commerce\",\"Marketplace Expansion\",\"Rebuild\",\"Low conv rate at \u20ac474 CPA\",\"\u20ac474\",\"1\"\n\"Search | Technology | EN\",\"Technology\",\"EN\",\"Rebuild\",\"Low conv rate at \u20ac91 CPA\",\"\u20ac363\",\"4\"\n\"PIM | Commerce - GEO Catalog\",\"Commerce\",\"GEO Catalog\",\"Scale\",\"5 conv at \u20ac188 CPA\",\"\u20ac941\",\"5\"";
+
+function downloadCSV(filename, data){
+  const BOM='﻿';
+  const blob=new Blob([BOM+data],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
 </script>
 <style>
   :root{--bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e28;--border:#252836;--accent:#6366f1;--accent2:#8b5cf6;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--blue:#3b82f6;--text:#e2e8f0;--muted:#64748b;--card:#161922;}
@@ -185,7 +201,7 @@ function restoreDoneStates(){
 <div class="header">
   <div class="header-left">
     <h1>Boost.space — Google Ads Audit</h1>
-    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-03-19 09:06 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
+    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-03-19 09:35 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
   </div>
   <div class="header-right">
     <div style="text-align:center">
@@ -213,7 +229,7 @@ function restoreDoneStates(){
   <div class="grid-4">
     <div class="card"><div class="card-title">Active Monthly Spend</div><div class="card-value text-red">€1,925</div><div class="card-sub">5 campaigns active</div></div>
     <div class="card"><div class="card-title">Google Ads Conversions</div><div class="card-value text-red">10</div><div class="card-sub">Reported in last 30 days</div></div>
-    <div class="card"><div class="card-title">PostHog Paid Convs</div><div class="card-value text-yellow">137</div><div class="card-sub">Micro-convs with GCLID present</div></div>
+    <div class="card"><div class="card-title">PostHog Paid Convs</div><div class="card-value text-yellow">138</div><div class="card-sub">Micro-convs with GCLID present</div></div>
     <div class="card"><div class="card-title">Paid Bounce Rate</div><div class="card-value text-red">84%</div><div class="card-sub">Avg 1.2 pages/session</div></div>
   </div>
   <div class="section-title">Score Breakdown</div>
@@ -6861,11 +6877,11 @@ function restoreDoneStates(){
         </div><div class="funnel-row">
           <div class="funnel-page">/signup</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:48%"></div></div></div>
-          <div class="funnel-visits">208</div>
+          <div class="funnel-visits">209</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/data-layer</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:45%"></div></div></div>
-          <div class="funnel-visits">196</div>
+          <div class="funnel-visits">197</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/solutions/commerce/marketplace-expansion</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:27%"></div></div></div>
@@ -6881,7 +6897,7 @@ function restoreDoneStates(){
         </div><div class="funnel-row">
           <div class="funnel-page">/install</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:20%"></div></div></div>
-          <div class="funnel-visits">88</div>
+          <div class="funnel-visits">89</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/pricing</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:15%"></div></div></div>
@@ -6912,12 +6928,12 @@ function restoreDoneStates(){
       <div class="card-title" style="margin-bottom:12px">Conversion Events — Paid vs Total</div>
       <div class="budget-row">
           <div class="budget-label ">select_starting_signup_point ✅</div>
-          <div class="budget-val"><strong >91</strong>
-            <span class="text-muted"> / 688 total (13.2%)</span></div>
+          <div class="budget-val"><strong >92</strong>
+            <span class="text-muted"> / 682 total (13.5%)</span></div>
         </div><div class="budget-row">
           <div class="budget-label ">form_submit ✅</div>
           <div class="budget-val"><strong >46</strong>
-            <span class="text-muted"> / 486 total (9.5%)</span></div>
+            <span class="text-muted"> / 488 total (9.4%)</span></div>
         </div><div class="budget-row">
           <div class="budget-label text-red">leady_new_lead ❌</div>
           <div class="budget-val"><strong class="text-red">0</strong>
@@ -6974,10 +6990,18 @@ function restoreDoneStates(){
     <div class="pb-section-header">
       <div class="pb-priority pb-p1">P1</div>
       <div style="flex:1">
-        <h3>Add Negative Keywords</h3>
-        <p>Add these to campaign-level negative keyword lists in Google Ads. Use [exact match] format shown.</p>
+        <h3>Exclude Negative Keywords</h3>
+        <p>Competitor &amp; irrelevant search terms wasting budget. Export CSV → Google Ads → Tools → Bulk Actions → Upload.</p>
       </div>
-      <button class="copy-btn" onclick="copyEl('neg-master', this)" style="align-self:flex-start">📋 Copy Master List (41 terms)</button>
+      <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;min-width:200px">
+        <button class="copy-btn" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="downloadCSV('negatives_campaign_level.csv', NEG_CAMP_CSV)">⬇ Campaign-Level CSV (41 rows)</button>
+        <button class="copy-btn" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="downloadCSV('negatives_account_level.csv', NEG_ACCT_CSV)">⬇ Account-Level CSV (41 rows)</button>
+        <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.4">Campaign-level = per campaign<br>Account-level = blocks all campaigns</div>
+      </div>
+    </div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:var(--muted);font-family:monospace;line-height:1.8">
+      <span style="color:var(--text);font-weight:600">CSV format:</span> &nbsp;
+      Campaign &nbsp;|&nbsp; Ad Group &nbsp;|&nbsp; Account keyword type &nbsp;|&nbsp; Keyword &nbsp;|&nbsp; Criterion Type
     </div>
     <div class="pb-neg-block">
           <div class="pb-neg-header">
@@ -7043,7 +7067,7 @@ function restoreDoneStates(){
         </div>
     <div class="neg-master-block">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <strong style="font-size:13px">Master List — All Campaigns</strong>
+        <strong style="font-size:13px">Copy list (text)</strong>
         <span style="color:var(--muted);font-size:12px">41 unique terms · exact match</span>
       </div>
       <textarea id="neg-master" class="neg-textarea" style="min-height:140px" readonly>[ai]
@@ -7094,10 +7118,11 @@ function restoreDoneStates(){
   <div class="pb-section">
     <div class="pb-section-header">
       <div class="pb-priority pb-p2">P2</div>
-      <div>
+      <div style="flex:1">
         <h3>Campaign Actions</h3>
         <p>Sorted by urgency — pause zero-conversion campaigns first to stop budget bleed.</p>
       </div>
+      <button class="copy-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);align-self:flex-start" onclick="downloadCSV('campaign_actions.csv', CAMP_ACT_CSV)">⬇ Export CSV</button>
     </div>
     <div class="table-wrap" style="margin:0">
       <table>
@@ -7271,6 +7296,12 @@ function restoreDoneStates(){
           </div>
         </div>
   </div>
+
+  <!-- P4: Add Targeted Keywords (converting search terms not yet as keywords) -->
+  <!-- no new keyword suggestions -->
+  
+  
+
 </div>
 
 <script>

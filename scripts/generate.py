@@ -265,6 +265,15 @@ def adgroup_funnel(ag_name):
         return "MOFU", "badge-yellow mofu"
     return "TOFU", "badge-blue tofu"
 
+# ── CSV export helpers ────────────────────────────────────────────────────────
+def to_csv_js(rows):
+    """Convert list of lists to a CSV string, JSON-encoded for safe JS embedding."""
+    lines = []
+    for row in rows:
+        cells = ['"' + str(v).replace('"', '""') + '"' for v in row]
+        lines.append(",".join(cells))
+    return json.dumps("\n".join(lines))
+
 # ── Score calculation ─────────────────────────────────────────────────────────
 def calc_score(camps, terms, ph):
     total_cost = sum(c["cost_czk"] for c in camps)
@@ -475,6 +484,61 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
     ))
     all_neg_text = "\n".join(f"[{term}]" for term in all_neg_terms)
 
+    # ── Google Ads CSV exports ────────────────────────────────────────────────
+    NEG_HEADERS = ["Campaign", "Ad Group", "Account keyword type", "Keyword", "Criterion Type"]
+
+    # Campaign-level negatives (one row per campaign × term, deduped)
+    seen_neg = set()
+    neg_camp_csv_rows = [NEG_HEADERS]
+    for t in terms:
+        intent, _ = classify_term(t["term"])
+        if intent in ("COMPETITOR", "IRRELEVANT"):
+            key = (t["campaign"], t["term"])
+            if key not in seen_neg:
+                seen_neg.add(key)
+                neg_camp_csv_rows.append([t["campaign"], "", "Excluded negative keywords", t["term"], "Negative Exact"])
+    neg_camp_csv_js = to_csv_js(neg_camp_csv_rows)
+
+    # Account-level negatives (all unique terms, applied account-wide)
+    neg_acct_csv_rows = [NEG_HEADERS]
+    for term in all_neg_terms:
+        neg_acct_csv_rows.append(["<account>", "", "Excluded negative keywords", term, "Negative Exact"])
+    neg_acct_csv_js = to_csv_js(neg_acct_csv_rows)
+
+    # Converting search terms not yet added as keywords → suggest adding
+    existing_kw_texts = {k["keyword"].lower() for k in keywords}
+    add_kw_rows = [["Campaign", "Ad Group", "Keyword", "Criterion Type"]]
+    seen_add = set()
+    for t in sorted(terms, key=lambda x: -x["conv"]):
+        intent, _ = classify_term(t["term"])
+        key = (t["campaign"], t["adgroup"], t["term"].lower())
+        if (t["conv"] > 0 and intent not in ("COMPETITOR", "IRRELEVANT")
+                and t["term"].lower() not in existing_kw_texts
+                and key not in seen_add):
+            seen_add.add(key)
+            match = "Exact" if t["conv"] >= 2 else "Phrase"
+            add_kw_rows.append([t["campaign"], t["adgroup"], t["term"], match])
+    add_kw_csv_js  = to_csv_js(add_kw_rows)
+    has_add_kws    = len(add_kw_rows) > 1
+    add_kw_count   = len(add_kw_rows) - 1
+
+    # Campaign actions CSV (for reference / tracking)
+    camp_act_rows = [["Campaign", "Vertical", "Use Case", "Action", "Reason", "30d Spend", "30d Conv"]]
+    for c in sorted(camps, key=lambda x: (0 if x["conv"] == 0 and x["cost_czk"] > 300 else
+                                           1 if x["conv"] == 0 else
+                                           2 if x["conv"] < 5 else 3)):
+        pn = parse_camp_name(c["name"])
+        if c["conv"] == 0 and c["cost_czk"] > 300:
+            act, reason = "Pause", "0 conversions, significant spend"
+        elif c["conv"] == 0:
+            act, reason = "Review", "0 conversions, review targeting"
+        elif c["conv"] < 5 and c["cost_czk"] > 500:
+            act, reason = "Rebuild", f"Low conv rate at {c['cpa_eur']} CPA"
+        else:
+            act, reason = "Scale", f"{int(c['conv'])} conv at {c['cpa_eur']} CPA"
+        camp_act_rows.append([c["name"], pn["vertical"], pn["label"], act, reason, c["cost_eur"], int(c["conv"])])
+    camp_act_csv_js = to_csv_js(camp_act_rows)
+
     neg_camp_blocks = ""
     for ni, (camp_name, data) in enumerate(sorted(neg_by_camp.items(), key=lambda x: -len(x[1]["terms"]))):
         pn = parse_camp_name(camp_name)
@@ -646,6 +710,22 @@ function restoreDoneStates(){{
       if(row) row.style.opacity='0.4';
     }}
   }});
+}}
+
+/* ── Google Ads CSV download data ───────────────────────────────────────── */
+var NEG_CAMP_CSV  = {neg_camp_csv_js};
+var NEG_ACCT_CSV  = {neg_acct_csv_js};
+var ADD_KW_CSV    = {add_kw_csv_js};
+var CAMP_ACT_CSV  = {camp_act_csv_js};
+
+function downloadCSV(filename, data){{
+  const BOM='\uFEFF';
+  const blob=new Blob([BOM+data],{{type:'text/csv;charset=utf-8;'}});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
 }}
 </script>
 <style>
@@ -902,15 +982,23 @@ function restoreDoneStates(){{
     <div class="pb-section-header">
       <div class="pb-priority pb-p1">P1</div>
       <div style="flex:1">
-        <h3>Add Negative Keywords</h3>
-        <p>Add these to campaign-level negative keyword lists in Google Ads. Use [exact match] format shown.</p>
+        <h3>Exclude Negative Keywords</h3>
+        <p>Competitor &amp; irrelevant search terms wasting budget. Export CSV → Google Ads → Tools → Bulk Actions → Upload.</p>
       </div>
-      <button class="copy-btn" onclick="copyEl('neg-master', this)" style="align-self:flex-start">📋 Copy Master List ({len(all_neg_terms)} terms)</button>
+      <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;min-width:200px">
+        <button class="copy-btn" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="downloadCSV('negatives_campaign_level.csv', NEG_CAMP_CSV)">⬇ Campaign-Level CSV ({len(neg_camp_csv_rows)-1} rows)</button>
+        <button class="copy-btn" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="downloadCSV('negatives_account_level.csv', NEG_ACCT_CSV)">⬇ Account-Level CSV ({len(all_neg_terms)} rows)</button>
+        <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.4">Campaign-level = per campaign<br>Account-level = blocks all campaigns</div>
+      </div>
+    </div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:var(--muted);font-family:monospace;line-height:1.8">
+      <span style="color:var(--text);font-weight:600">CSV format:</span> &nbsp;
+      Campaign &nbsp;|&nbsp; Ad Group &nbsp;|&nbsp; Account keyword type &nbsp;|&nbsp; Keyword &nbsp;|&nbsp; Criterion Type
     </div>
     {neg_camp_blocks}
     <div class="neg-master-block">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <strong style="font-size:13px">Master List — All Campaigns</strong>
+        <strong style="font-size:13px">Copy list (text)</strong>
         <span style="color:var(--muted);font-size:12px">{len(all_neg_terms)} unique terms · exact match</span>
       </div>
       <textarea id="neg-master" class="neg-textarea" style="min-height:140px" readonly>{all_neg_text}</textarea>
@@ -921,10 +1009,11 @@ function restoreDoneStates(){{
   <div class="pb-section">
     <div class="pb-section-header">
       <div class="pb-priority pb-p2">P2</div>
-      <div>
+      <div style="flex:1">
         <h3>Campaign Actions</h3>
         <p>Sorted by urgency — pause zero-conversion campaigns first to stop budget bleed.</p>
       </div>
+      <button class="copy-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);align-self:flex-start" onclick="downloadCSV('campaign_actions.csv', CAMP_ACT_CSV)">⬇ Export CSV</button>
     </div>
     <div class="table-wrap" style="margin:0">
       <table>
@@ -945,6 +1034,28 @@ function restoreDoneStates(){{
     </div>
     {struct_rows}
   </div>
+
+  <!-- P4: Add Targeted Keywords (converting search terms not yet as keywords) -->
+  {'<div class="pb-section">' if has_add_kws else '<!-- no new keyword suggestions -->'}
+  {f"""
+  <div class="pb-section-header">
+    <div class="pb-priority" style="background:rgba(99,102,241,0.2);color:#a78bfa;border:1px solid rgba(99,102,241,0.3);font-size:14px;font-weight:800;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">P4</div>
+    <div style="flex:1">
+      <h3>Add Targeted Keywords</h3>
+      <p>Converting search terms ({add_kw_count}) not yet in your keyword lists — add as Exact or Phrase match to capture them explicitly.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;min-width:200px">
+      <button class="copy-btn" style="background:linear-gradient(135deg,#a78bfa,#6366f1)" onclick="downloadCSV('add_keywords.csv', ADD_KW_CSV)">⬇ Keywords CSV ({add_kw_count} rows)</button>
+      <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.4">Exact = 2+ conversions<br>Phrase = 1 conversion</div>
+    </div>
+  </div>
+  <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:var(--muted);font-family:monospace;line-height:1.8">
+    <span style="color:var(--text);font-weight:600">CSV format:</span> &nbsp;
+    Campaign &nbsp;|&nbsp; Ad Group &nbsp;|&nbsp; Keyword &nbsp;|&nbsp; Criterion Type
+  </div>
+  """ if has_add_kws else ""}
+  {'</div>' if has_add_kws else ''}
+
 </div>
 
 <script>
