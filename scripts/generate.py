@@ -143,53 +143,62 @@ def pull_google_ads():
     return camps, terms, keywords
 
 # ── Pull PostHog ──────────────────────────────────────────────────────────────
+POSTHOG_STUB = {
+    "conversions": [], "pages": [], "sessions": 0, "avg_pages": 0, "bounce_pct": 0,
+    "_stub": True,
+}
+
 def pull_posthog():
-    conv_rows = ph_query("""
-        SELECT event, count() as total,
-               countIf(properties.gclid IS NOT NULL) as paid
-        FROM events
-        WHERE event IN ('demo_meeting_booked','leady_new_lead',
-                        'be_form_submit_demo_lead',
-                        'select_starting_signup_point','form_submit')
-          AND timestamp >= now() - INTERVAL 30 DAY
-        GROUP BY event ORDER BY total DESC
-    """).get("results", [])
+    try:
+        conv_rows = ph_query("""
+            SELECT event, count() as total,
+                   countIf(properties.gclid IS NOT NULL) as paid
+            FROM events
+            WHERE event IN ('demo_meeting_booked','leady_new_lead',
+                            'be_form_submit_demo_lead',
+                            'select_starting_signup_point','form_submit')
+              AND timestamp >= now() - INTERVAL 30 DAY
+            GROUP BY event ORDER BY total DESC
+        """).get("results", [])
 
-    pages_rows = ph_query("""
-        SELECT properties.$pathname, count() as paid_views
-        FROM events
-        WHERE event = '$pageview'
-          AND properties.gclid IS NOT NULL
-          AND timestamp >= now() - INTERVAL 30 DAY
-        GROUP BY properties.$pathname
-        ORDER BY paid_views DESC LIMIT 15
-    """).get("results", [])
+        pages_rows = ph_query("""
+            SELECT properties.$pathname, count() as paid_views
+            FROM events
+            WHERE event = '$pageview'
+              AND properties.gclid IS NOT NULL
+              AND timestamp >= now() - INTERVAL 30 DAY
+            GROUP BY properties.$pathname
+            ORDER BY paid_views DESC LIMIT 15
+        """).get("results", [])
 
-    session_rows = ph_query("""
-        SELECT properties.$session_id,
-               countIf(event='$pageview') as pages,
-               count() as events
-        FROM events
-        WHERE properties.gclid IS NOT NULL
-          AND timestamp >= now() - INTERVAL 30 DAY
-          AND properties.$session_id IS NOT NULL
-        GROUP BY properties.$session_id
-    """).get("results", [])
+        session_rows = ph_query("""
+            SELECT properties.$session_id,
+                   countIf(event='$pageview') as pages,
+                   count() as events
+            FROM events
+            WHERE properties.gclid IS NOT NULL
+              AND timestamp >= now() - INTERVAL 30 DAY
+              AND properties.$session_id IS NOT NULL
+            GROUP BY properties.$session_id
+        """).get("results", [])
 
-    bounce_pct, avg_pages, total_sessions = 0, 0, 0
-    if session_rows:
-        n = len(session_rows)
-        total_sessions = n
-        avg_pages = round(sum(r[1] for r in session_rows) / n, 1)
-        bounce_pct = round(sum(1 for r in session_rows if r[1] <= 1) / n * 100, 0)
+        bounce_pct, avg_pages, total_sessions = 0, 0, 0
+        if session_rows:
+            n = len(session_rows)
+            total_sessions = n
+            avg_pages = round(sum(r[1] for r in session_rows) / n, 1)
+            bounce_pct = round(sum(1 for r in session_rows if r[1] <= 1) / n * 100, 0)
 
-    return {
-        "conversions": [{"event": r[0], "total": r[1], "paid": r[2]} for r in conv_rows],
-        "pages":       [{"path": r[0], "paid_views": r[1]} for r in pages_rows],
-        "sessions":    total_sessions,
-        "avg_pages":   avg_pages,
-        "bounce_pct":  bounce_pct,
-    }
+        return {
+            "conversions": [{"event": r[0], "total": r[1], "paid": r[2]} for r in conv_rows],
+            "pages":       [{"path": r[0], "paid_views": r[1]} for r in pages_rows],
+            "sessions":    total_sessions,
+            "avg_pages":   avg_pages,
+            "bounce_pct":  bounce_pct,
+        }
+    except Exception as e:
+        print(f"  ⚠️  PostHog unavailable ({e}) — using stub. Update POSTHOG_KEY in ACCESS.md.")
+        return POSTHOG_STUB
 
 # ── Classify search terms ─────────────────────────────────────────────────────
 COMPETITOR  = {"seona","alli ai","usestyle","tradewheel","tradelle","sellvia","sellhub",
@@ -218,6 +227,44 @@ def funnel_label(kw_text):
         return "MOFU"
     return "TOFU"
 
+# ── Campaign name parser ──────────────────────────────────────────────────────
+def parse_camp_name(name):
+    """
+    Parses naming convention: '[Product] | [Vertical] - [Use Case]'
+    or '[Product] | [Vertical] | [Region]'
+    Returns dict with product, vertical, usecase, badge_cls, short
+    """
+    if " | " in name:
+        parts = name.split(" | ")
+        product = parts[0].strip()
+        if " - " in name:
+            # CDP | Marketing - AI Personalized Activation
+            rest = parts[1] if len(parts) > 1 else ""
+            vertical, usecase = rest.split(" - ", 1) if " - " in rest else (rest, "")
+            vertical = vertical.strip(); usecase = usecase.strip()
+        else:
+            # Search | Technology | EN
+            vertical = parts[1].strip() if len(parts) > 1 else ""
+            usecase  = parts[2].strip() if len(parts) > 2 else ""
+        badge = ("badge-purple" if product == "CDP"
+                 else "badge-blue" if product == "PIM"
+                 else "badge-green" if product == "Search"
+                 else "badge-gray")
+        label = usecase if usecase else vertical
+        return {"product": product, "vertical": vertical, "usecase": usecase,
+                "badge": badge, "label": label, "full": name}
+    return {"product": "", "vertical": "", "usecase": name,
+            "badge": "badge-gray", "label": name, "full": name}
+
+def adgroup_funnel(ag_name):
+    """Classify ad group by name pattern → BOFU / MOFU / TOFU"""
+    n = ag_name.lower()
+    if any(x in n for x in ["alternative","comparison","pricing","price","demo","trial","switch","migration"]):
+        return "BOFU", "badge-green bofu"
+    if any(x in n for x in ["software","platform","management","analytics","solution","optimization","tool","system"]):
+        return "MOFU", "badge-yellow mofu"
+    return "TOFU", "badge-blue tofu"
+
 # ── Score calculation ─────────────────────────────────────────────────────────
 def calc_score(camps, terms, ph):
     total_cost = sum(c["cost_czk"] for c in camps)
@@ -225,7 +272,6 @@ def calc_score(camps, terms, ph):
     waste_czk  = sum(t["cost_czk"] for t in terms
                      if classify_term(t["term"])[0] in ("COMPETITOR","IRRELEVANT"))
     waste_pct  = (waste_czk / total_cost * 100) if total_cost else 0
-    qs1_cost   = sum(k["cost_czk"] for k in [] if k.get("qs") == 1)  # placeholder
     bounce     = ph.get("bounce_pct", 80)
 
     tracking   = max(5,  25 - (15 if ph["conversions"] and all(c["paid"]==0 for c in ph["conversions"] if c["event"]=="demo_meeting_booked") else 0))
@@ -251,14 +297,17 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
     ph_total_hv     = sum(c["total"] for c in ph["conversions"]
                           if c["event"] in ("demo_meeting_booked","leady_new_lead","be_form_submit_demo_lead"))
 
-    # Build campaign rows
+    # ── Campaign rows (grouped by product) ───────────────────────────────────
     def camp_row(c):
-        verdict = "badge-red" if c["conv"] == 0 and c["cost_czk"] > 200 else "badge-yellow"
-        vtext   = "Pause" if c["conv"] == 0 and c["cost_czk"] > 300 else ("Rebuild" if c["conv"] < 5 else "Scale")
+        pn = parse_camp_name(c['name'])
+        prod_badge = f'<span class="badge {pn["badge"]}" style="margin-right:6px;font-size:10px">{pn["product"]}</span>' if pn["product"] else ""
+        name_cell  = f'{prod_badge}<strong>{pn["label"]}</strong>'
+        verdict    = "badge-red" if c["conv"] == 0 and c["cost_czk"] > 200 else "badge-yellow"
+        vtext      = "Pause" if c["conv"] == 0 and c["cost_czk"] > 300 else ("Rebuild" if c["conv"] < 5 else "Scale")
         is_bar  = f'<div class="bar-wrap"><div class="bar-fill bar-{"red" if (c["is"] or 0)<20 else "yellow"}" style="width:{c["is"] or 0}%"></div></div>' if c["is"] else ""
         rl_bar  = f'<div class="bar-wrap"><div class="bar-fill bar-red" style="width:{c["rank_lost"] or 0}%"></div></div>' if c["rank_lost"] else ""
         return f"""<tr>
-          <td><strong>{c['name']}</strong></td>
+          <td>{name_cell}<div style="font-size:10px;color:var(--muted);margin-top:2px">{pn["vertical"]}</div></td>
           <td><span class="badge badge-blue">{c['type'].replace('_',' ').title()}</span></td>
           <td class="num">{c['impr']:,}</td>
           <td class="num">{c['clicks']:,}</td>
@@ -272,16 +321,34 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
           <td><span class="badge {verdict}">{vtext}</span></td>
         </tr>"""
 
-    camp_rows = "\n".join(camp_row(c) for c in camps)
+    # Group campaigns by product
+    camps_by_product = {}
+    for c in camps:
+        pn = parse_camp_name(c["name"])
+        camps_by_product.setdefault(pn["product"] or "Other", []).append(c)
 
-    # Build search term rows
+    camp_rows_html = ""
+    for product in sorted(camps_by_product.keys()):
+        badge_cls = ("badge-purple" if product == "CDP" else "badge-blue" if product == "PIM"
+                     else "badge-green" if product == "Search" else "badge-gray")
+        camp_rows_html += f'<tr><td colspan="12" style="background:var(--bg3);padding:8px 12px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px"><span class="badge {badge_cls}" style="margin-right:8px">{product}</span>{camps_by_product[product][0]["name"].split(" | ")[1].split(" - ")[0].strip() if " | " in camps_by_product[product][0]["name"] else ""}</td></tr>\n'
+        for c in camps_by_product[product]:
+            camp_rows_html += camp_row(c) + "\n"
+
+    # ── Search term rows ──────────────────────────────────────────────────────
     def term_row(t):
         intent, cls = classify_term(t["term"])
+        pn   = parse_camp_name(t["campaign"])
+        ag_f, ag_cls = adgroup_funnel(t["adgroup"])
+        prod_badge = f'<span class="badge {pn["badge"]}" style="margin-right:4px;font-size:10px">{pn["product"]}</span>' if pn["product"] else ""
+        camp_cell  = f'{prod_badge}<span style="font-size:11px">{pn["label"]}</span>'
+        ag_cell    = f'<span class="badge {ag_cls}" style="font-size:10px">{ag_f}</span> <span style="font-size:11px;color:var(--muted)">{t["adgroup"]}</span>'
         action = "→ Negative" if intent in ("COMPETITOR","IRRELEVANT") else ("Fix QS" if t["conv"]==0 and t["cost_czk"]>500 else "Keep")
         ab = "badge-red" if intent in ("COMPETITOR","IRRELEVANT") else ("badge-green" if t["conv"]>0 else "badge-yellow")
         return f"""<tr>
           <td><strong>{t['term']}</strong></td>
-          <td style="font-size:11px">{t['campaign'].replace('PIM | Commerce - ','PIM ').replace('CDP | Marketing - ','CDP ')}</td>
+          <td>{camp_cell}</td>
+          <td>{ag_cell}</td>
           <td class="num">{t['cost_eur']}</td>
           <td class="num">{t['clicks']}</td>
           <td class="num">{t['cpc_eur']}</td>
@@ -293,43 +360,71 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
 
     term_rows = "\n".join(term_row(t) for t in terms[:50])
 
-    # Build keyword funnel rows
-    def kw_row(k):
-        fl = funnel_label(k["keyword"])
-        fl_cls = {"BOFU":"badge-green bofu","MOFU":"badge-yellow mofu","TOFU":"badge-blue tofu"}[fl]
-        qs_badge = f'<span class="badge {"badge-red" if k["qs"]==1 else "badge-yellow" if k["qs"] and k["qs"]<5 else "badge-green" if k["qs"] and k["qs"]>=7 else "badge-gray"}">{k["qs"] if k["qs"] else "—"}</span>'
-        return f"""<tr>
-          <td>{k['keyword']}</td>
-          <td><span class="badge badge-{'purple' if k['match']=='PHRASE' else 'green' if k['match']=='EXACT' else 'blue'}">{k['match'][:3]}</span></td>
-          <td>{qs_badge}</td>
-          <td class="num">{k['cost_eur']}</td>
-          <td class="num">{k['clicks']}</td>
-          <td class="num">{k['conv']}</td>
-          <td><span class="badge {fl_cls}">{fl}</span></td>
-        </tr>"""
-
-    kw_rows_by_camp = {}
+    # ── Keyword funnel rows grouped by Product → Use Case → Adgroup ──────────
+    # Build structure: product → campaign → adgroup → [keywords]
+    kw_tree = {}
     for k in keywords:
-        kw_rows_by_camp.setdefault(k["campaign"], []).append(k)
+        pn = parse_camp_name(k["campaign"])
+        prod = pn["product"] or "Other"
+        camp = k["campaign"]
+        ag   = k["adgroup"]
+        kw_tree.setdefault(prod, {}).setdefault(camp, {}).setdefault(ag, []).append(k)
 
     kw_sections = ""
-    for camp_name, kws in kw_rows_by_camp.items():
-        total_c = sum(k["cost_czk"] for k in kws)
-        total_v = sum(k["conv"] for k in kws)
-        rows = "\n".join(kw_row(k) for k in sorted(kws, key=lambda x: -x["cost_czk"])[:20])
-        kw_sections += f"""
-        <div class="table-wrap" style="margin-bottom:20px">
-          <div class="table-header">
-            <h3>{camp_name}</h3>
-            <span style="color:var(--muted);font-size:12px">{len(kws)} keywords · {eur(total_c)} spend · {total_v:.0f} conv</span>
-          </div>
-          <table>
-            <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
-            <tbody>{rows}</tbody>
-          </table>
-        </div>"""
+    for product in sorted(kw_tree.keys()):
+        prod_badge_cls = ("badge-purple" if product == "CDP" else "badge-blue" if product == "PIM"
+                          else "badge-green" if product == "Search" else "badge-gray")
+        kw_sections += f'<div style="margin:24px 0 12px"><span class="badge {prod_badge_cls}" style="font-size:14px;padding:5px 14px;margin-right:8px">{product}</span></div>\n'
 
-    # PostHog conversion table
+        for camp_name in sorted(kw_tree[product].keys()):
+            pn2  = parse_camp_name(camp_name)
+            camp_kws_all = [k for ags in kw_tree[product][camp_name].values() for k in ags]
+            total_c = sum(k["cost_czk"] for k in camp_kws_all)
+            total_v = sum(k["conv"] for k in camp_kws_all)
+
+            ag_tables = ""
+            for ag_name in sorted(kw_tree[product][camp_name].keys()):
+                ag_kws = sorted(kw_tree[product][camp_name][ag_name], key=lambda x: -x["cost_czk"])[:20]
+                ag_f, ag_cls = adgroup_funnel(ag_name)
+                ag_cost = sum(k["cost_czk"] for k in ag_kws)
+                ag_conv = sum(k["conv"] for k in ag_kws)
+                def kw_row(k):
+                    fl = funnel_label(k["keyword"])
+                    fl_cls = {"BOFU":"badge-green bofu","MOFU":"badge-yellow mofu","TOFU":"badge-blue tofu"}[fl]
+                    qs_badge = f'<span class="badge {"badge-red" if k["qs"]==1 else "badge-yellow" if k["qs"] and k["qs"]<5 else "badge-green" if k["qs"] and k["qs"]>=7 else "badge-gray"}">{k["qs"] if k["qs"] else "—"}</span>'
+                    return f"""<tr>
+                      <td>{k['keyword']}</td>
+                      <td><span class="badge badge-{'purple' if k['match']=='PHRASE' else 'green' if k['match']=='EXACT' else 'blue'}">{k['match'][:3]}</span></td>
+                      <td>{qs_badge}</td>
+                      <td class="num">{k['cost_eur']}</td>
+                      <td class="num">{k['clicks']}</td>
+                      <td class="num">{k['conv']}</td>
+                      <td><span class="badge {fl_cls}">{fl}</span></td>
+                    </tr>"""
+                kw_rows_str = "\n".join(kw_row(k) for k in ag_kws)
+                ag_tables += f"""
+                <div style="margin-bottom:12px">
+                  <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
+                    <span class="badge {ag_cls}" style="font-size:10px">{ag_f}</span>
+                    <span style="font-size:12px;font-weight:600">{ag_name}</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">{len(ag_kws)} kws · {eur(ag_cost)} · {ag_conv:.0f} conv</span>
+                  </div>
+                  <table>
+                    <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
+                    <tbody>{kw_rows_str}</tbody>
+                  </table>
+                </div>"""
+
+            kw_sections += f"""
+            <div class="table-wrap" style="margin-bottom:20px">
+              <div class="table-header">
+                <h3><span class="badge {prod_badge_cls}" style="margin-right:6px;font-size:11px">{product}</span>{pn2["label"]}</h3>
+                <span style="color:var(--muted);font-size:12px">{len(camp_kws_all)} keywords · {eur(total_c)} spend · {total_v:.0f} conv</span>
+              </div>
+              {ag_tables}
+            </div>"""
+
+    # ── PostHog conversion table ──────────────────────────────────────────────
     conv_rows_html = ""
     for c in ph["conversions"]:
         pct = round(c["paid"]/c["total"]*100,1) if c["total"] else 0
@@ -340,7 +435,6 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
             <span class="text-muted"> / {c['total']} total ({pct}%)</span></div>
         </div>"""
 
-    # PostHog pages
     pages_html = ""
     max_pv = ph["pages"][0]["paid_views"] if ph["pages"] else 1
     for p in ph["pages"]:
@@ -351,10 +445,10 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
           <div class="funnel-visits">{p['paid_views']}</div>
         </div>"""
 
+    # ── Score bars ────────────────────────────────────────────────────────────
     score_color = "#ef4444" if score < 50 else "#f59e0b" if score < 70 else "#10b981"
     grade = "F" if score < 40 else "D" if score < 60 else "C" if score < 75 else "B" if score < 90 else "A"
 
-    # Score bar rows
     def sbar(label, val, max_val, color="red"):
         pct = int(val/max_val*100)
         c = "bar-green" if pct>66 else "bar-yellow" if pct>33 else "bar-red"
@@ -364,6 +458,114 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
           <div class="bar-wrap"><div class="bar-fill {c}" style="width:{pct}%"></div></div>
         </div>"""
 
+    # ── Playbook data ─────────────────────────────────────────────────────────
+    # Negative keywords grouped by campaign
+    neg_by_camp = {}
+    for t in terms:
+        intent, _ = classify_term(t["term"])
+        if intent in ("COMPETITOR", "IRRELEVANT"):
+            neg_by_camp.setdefault(t["campaign"], {"terms": [], "intent": {}})
+            if t["term"] not in neg_by_camp[t["campaign"]]["terms"]:
+                neg_by_camp[t["campaign"]]["terms"].append(t["term"])
+                neg_by_camp[t["campaign"]]["intent"][t["term"]] = intent
+
+    all_neg_terms = sorted(set(
+        t["term"] for t in terms
+        if classify_term(t["term"])[0] in ("COMPETITOR", "IRRELEVANT")
+    ))
+    all_neg_text = "\n".join(f"[{term}]" for term in all_neg_terms)
+
+    neg_camp_blocks = ""
+    for ni, (camp_name, data) in enumerate(sorted(neg_by_camp.items(), key=lambda x: -len(x[1]["terms"]))):
+        pn = parse_camp_name(camp_name)
+        prod_badge = f'<span class="badge {pn["badge"]}" style="margin-right:4px;font-size:10px">{pn["product"]}</span>' if pn["product"] else ""
+        feature = pn["label"] or camp_name
+        terms_text = "\n".join(f"[{t}]" for t in sorted(data["terms"]))
+        intent_pills = ""
+        comp_count = sum(1 for t, i in data["intent"].items() if i == "COMPETITOR")
+        irr_count  = sum(1 for t, i in data["intent"].items() if i == "IRRELEVANT")
+        if comp_count: intent_pills += f'<span class="badge badge-purple" style="font-size:10px;margin-right:4px">{comp_count} competitor</span>'
+        if irr_count:  intent_pills += f'<span class="badge badge-red" style="font-size:10px">{irr_count} irrelevant</span>'
+        neg_camp_blocks += f"""<div class="pb-neg-block">
+          <div class="pb-neg-header">
+            <span>{prod_badge}<strong>{feature}</strong> &nbsp;{intent_pills}</span>
+            <button class="copy-btn" onclick="copyEl('neg-{ni}', this)">📋 Copy {len(data["terms"])} terms</button>
+          </div>
+          <textarea id="neg-{ni}" class="neg-textarea" readonly>{terms_text}</textarea>
+        </div>"""
+
+    # Campaign action rows
+    action_rows = ""
+    sorted_camps = sorted(camps, key=lambda x: (0 if x["conv"] == 0 and x["cost_czk"] > 300 else
+                                                  1 if x["conv"] == 0 else
+                                                  2 if x["conv"] < 5 else 3))
+    for ai, c in enumerate(sorted_camps):
+        pn = parse_camp_name(c["name"])
+        prod_badge = f'<span class="badge {pn["badge"]}" style="margin-right:4px;font-size:10px">{pn["product"]}</span>' if pn["product"] else ""
+        feature = pn["label"] or c["name"]
+        if c["conv"] == 0 and c["cost_czk"] > 300:
+            act, act_cls = "Pause", "badge-red"
+            reason = f"0 conversions on {c['cost_eur']} spend — stop budget bleed"
+        elif c["conv"] == 0:
+            act, act_cls = "Review", "badge-yellow"
+            reason = f"0 conversions on {c['cost_eur']} — audit targeting & landing page"
+        elif c["conv"] < 5 and c["cost_czk"] > 500:
+            act, act_cls = "Rebuild", "badge-yellow"
+            reason = f"Only {int(c['conv'])} conv at {c['cpa_eur']} CPA — restructure ad groups"
+        else:
+            act, act_cls = "Scale", "badge-green"
+            reason = f"{int(c['conv'])} conversions at {c['cpa_eur']} CPA — increase daily budget"
+        action_rows += f"""<tr id="pb-row-{ai}" class="pb-action-row">
+          <td style="width:36px;text-align:center">
+            <input type="checkbox" class="done-cb" data-id="pb-act-{ai}" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
+          </td>
+          <td>{prod_badge}<strong>{feature}</strong>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px">{pn["vertical"]}</div></td>
+          <td><span class="badge {act_cls}">{act}</span></td>
+          <td style="color:var(--muted);font-size:12px">{reason}</td>
+          <td class="num" style="white-space:nowrap">{c['cost_eur']}</td>
+          <td class="num">{int(c['conv'])}</td>
+        </tr>"""
+
+    # Structural fix checklist
+    struct_items = [
+        ("fix-gclid",  "Fix GCLID 90-day cookie",
+         "Store gclid URL param in a 90-day cookie on first landing. Read cookie value on all pageviews to recover cross-session attribution. Without this, demos & leads on return visits show 0 paid attribution.",
+         "badge-red", "Critical"),
+        ("fix-utm",    "Fix UTM ValueTrack: {campaign} → {campaignname}",
+         "All campaign Final URLs use the invalid {campaign} parameter — replace with {campaignname}. Current state: all Google Ads sessions land with utm_campaign=(none) in PostHog.",
+         "badge-red", "Critical"),
+        ("fix-conv",   "Add demo_meeting_booked as Google Ads conversion action",
+         "Import the PostHog demo_meeting_booked event (via GCLID matching) as a conversion action. Currently Google Ads optimises on micro-conversions only, not actual demos.",
+         "badge-yellow", "High"),
+        ("fix-tcpa",   "Switch converting ad groups to Target CPA bidding",
+         "Ad groups with 5+ conversions in 90 days are eligible for Smart Bidding. Start with tCPA = current average × 1.2 to give the algorithm room to learn.",
+         "badge-yellow", "High"),
+        ("fix-neglist","Create shared negative keyword list for all campaigns",
+         "Apply the negatives from the P1 list above as a shared list across all campaigns. This prevents the same irrelevant terms from appearing again after Google expands match types.",
+         "badge-yellow", "High"),
+        ("fix-rlsa",   "Add RLSA audiences to all Search campaigns",
+         "Layer in website visitors (30-day) and demo-form visitors (90-day) as Observation audiences. Use bid adjustments: +30% for demo visitors, +15% for general website visitors.",
+         "badge-blue", "Medium"),
+        ("fix-assets", "Audit ad assets: add sitelinks, callouts, structured snippets",
+         "All campaigns are missing key ad extensions. Add at minimum: 4 sitelinks per campaign (Pricing, Demo, Case Studies, [Use Case]), 4 callouts, structured snippets for product features.",
+         "badge-blue", "Medium"),
+    ]
+
+    struct_rows = ""
+    for si, (sid, title, desc, pri_cls, pri_label) in enumerate(struct_items):
+        struct_rows += f"""<div id="pb-struct-{si}" class="pb-struct-item">
+          <input type="checkbox" class="done-cb" data-id="pb-struct-{si}" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer;flex-shrink:0;margin-top:2px">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <strong style="font-size:13px">{title}</strong>
+              <span class="badge {pri_cls}" style="font-size:10px">{pri_label}</span>
+            </div>
+            <p style="color:var(--muted);font-size:12px;line-height:1.6">{desc}</p>
+          </div>
+        </div>"""
+
+    # ── Build final HTML ──────────────────────────────────────────────────────
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -380,11 +582,11 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
     const u=document.getElementById('_u').value;
     const p=document.getElementById('_p').value;
     const [uh,ph]=await Promise.all([sha256(u),sha256(p)]);
-    if(uh===UH&&ph===PH){{sessionStorage.setItem('_auth','1');document.getElementById('_gate').style.display='none';document.getElementById('_app').style.display='block';}}
+    if(uh===UH&&ph===PH){{sessionStorage.setItem('_auth','1');document.getElementById('_gate').style.display='none';document.getElementById('_app').style.display='block';restoreDoneStates();}}
     else{{const err=document.getElementById('_err');err.textContent='Invalid credentials.';err.style.display='block';document.getElementById('_p').value='';}}
   }}
   window.addEventListener('DOMContentLoaded',function(){{
-    if(sessionStorage.getItem('_auth')==='1'){{document.getElementById('_gate').style.display='none';document.getElementById('_app').style.display='block';}}
+    if(sessionStorage.getItem('_auth')==='1'){{document.getElementById('_gate').style.display='none';document.getElementById('_app').style.display='block';restoreDoneStates();}}
     else{{document.getElementById('_gate').style.display='flex';document.getElementById('_app').style.display='none';}}
     document.getElementById('_form').addEventListener('submit',tryLogin);
   }});
@@ -398,7 +600,7 @@ async function triggerRefresh(){{
   try{{
     const res=await fetch('https://api.github.com/repos/Petrgyure/boost-space-audit/actions/workflows/refresh.yml/dispatches',{{
       method:'POST',
-      headers:{{'Authorization':'Bearer '+atob('{__GHTOKEN__}'),'Accept':'application/vnd.github+json','Content-Type':'application/json'}},
+      headers:{{'Authorization':'Bearer '+atob('{{__GHTOKEN__}}'),'Accept':'application/vnd.github+json','Content-Type':'application/json'}},
       body:JSON.stringify({{'ref':'main'}})
     }});
     if(res.status===204){{
@@ -411,6 +613,39 @@ async function triggerRefresh(){{
     }}
   }}catch(e){{status.textContent='❌ Network error: '+e.message;status.style.color='#f87171';}}
   btn.disabled=false; btn.textContent='🔄 Refresh Data';
+}}
+
+function copyEl(id, btn){{
+  const el=document.getElementById(id);
+  navigator.clipboard.writeText(el.value).then(()=>{{
+    const orig=btn.textContent;
+    btn.textContent='✅ Copied!';
+    btn.style.background='linear-gradient(135deg,#10b981,#34d399)';
+    setTimeout(()=>{{btn.textContent=orig;btn.style.background='';}},2000);
+  }}).catch(()=>{{el.select();document.execCommand('copy');}});
+}}
+
+function toggleDone(cb){{
+  const id=cb.dataset.id;
+  const row=document.getElementById(id)||cb.closest('tr,div.pb-struct-item');
+  if(cb.checked){{
+    localStorage.setItem('done-'+id,'1');
+    if(row){{row.style.opacity='0.4';}}
+  }}else{{
+    localStorage.removeItem('done-'+id);
+    if(row){{row.style.opacity='1';}}
+  }}
+}}
+
+function restoreDoneStates(){{
+  document.querySelectorAll('.done-cb').forEach(cb=>{{
+    const id=cb.dataset.id;
+    if(localStorage.getItem('done-'+id)==='1'){{
+      cb.checked=true;
+      const row=document.getElementById(id)||cb.closest('tr,div.pb-struct-item');
+      if(row) row.style.opacity='0.4';
+    }}
+  }});
 }}
 </script>
 <style>
@@ -477,6 +712,24 @@ async function triggerRefresh(){{
   .text-red{{color:var(--red);}} .text-green{{color:var(--green);}} .text-yellow{{color:var(--yellow);}} .text-muted{{color:var(--muted);}}
   .bofu{{background:rgba(16,185,129,0.15);color:#34d399;}} .mofu{{background:rgba(245,158,11,0.15);color:#fbbf24;}} .tofu{{background:rgba(59,130,246,0.15);color:#60a5fa;}}
   .competitor{{background:rgba(168,85,247,0.15);color:#c084fc;}} .irrelevant{{background:rgba(239,68,68,0.15);color:#f87171;}}
+  /* Playbook styles */
+  .pb-section{{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px;}}
+  .pb-section-header{{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}}
+  .pb-priority{{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;}}
+  .pb-p1{{background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.3);}}
+  .pb-p2{{background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);}}
+  .pb-p3{{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3);}}
+  .pb-section-header h3{{font-size:15px;font-weight:700;margin-bottom:3px;}}
+  .pb-section-header p{{font-size:12px;color:var(--muted);}}
+  .pb-neg-block{{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:10px;}}
+  .pb-neg-header{{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}}
+  .neg-textarea{{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:#a78bfa;font-family:monospace;font-size:12px;line-height:1.7;resize:vertical;min-height:80px;max-height:200px;}}
+  .copy-btn{{background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:6px;padding:7px 14px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}}
+  .copy-btn:hover{{opacity:0.9;}}
+  .neg-master-block{{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.3);border-radius:8px;padding:16px;margin-top:16px;}}
+  .pb-action-row td{{vertical-align:middle;}}
+  .pb-struct-item{{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);}}
+  .pb-struct-item:last-child{{border-bottom:none;padding-bottom:0;}}
 </style>
 </head>
 <body>
@@ -514,12 +767,13 @@ async function triggerRefresh(){{
   </div>
 </div>
 <div class="tabs">
-  <div class="tab active" onclick="showTab('dashboard')">📊 Dashboard</div>
-  <div class="tab" onclick="showTab('campaigns')">🎯 Campaigns</div>
-  <div class="tab" onclick="showTab('searchterms')">🔍 Search Terms</div>
-  <div class="tab" onclick="showTab('funnel')">🏷️ Keyword Funnel</div>
-  <div class="tab" onclick="showTab('posthog')">📈 PostHog Behaviour</div>
-  <div class="tab" onclick="showTab('budget')">💰 Budget Model</div>
+  <div class="tab active" onclick="showTab('dashboard',this)">📊 Dashboard</div>
+  <div class="tab" onclick="showTab('campaigns',this)">🎯 Campaigns</div>
+  <div class="tab" onclick="showTab('searchterms',this)">🔍 Search Terms</div>
+  <div class="tab" onclick="showTab('funnel',this)">🏷️ Keyword Funnel</div>
+  <div class="tab" onclick="showTab('posthog',this)">📈 PostHog</div>
+  <div class="tab" onclick="showTab('budget',this)">💰 Budget Model</div>
+  <div class="tab" onclick="showTab('playbook',this)" style="color:#f87171;font-weight:700">⚡ Playbook</div>
 </div>
 
 <!-- DASHBOARD -->
@@ -565,8 +819,8 @@ async function triggerRefresh(){{
   <div class="section-title">Active Campaigns — Last 30 Days</div>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Campaign</th><th>Type</th><th class="num">Impr.</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">Cost</th><th class="num">CPC</th><th class="num">Conv.</th><th class="num">CPA</th><th class="num">Imp Share</th><th class="num">Rank Lost</th><th>Verdict</th></tr></thead>
-      <tbody>{camp_rows}</tbody>
+      <thead><tr><th>Campaign / Use Case</th><th>Type</th><th class="num">Impr.</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">Cost</th><th class="num">CPC</th><th class="num">Conv.</th><th class="num">CPA</th><th class="num">Imp Share</th><th class="num">Rank Lost</th><th>Verdict</th></tr></thead>
+      <tbody>{camp_rows_html}</tbody>
     </table>
   </div>
 </div>
@@ -576,7 +830,7 @@ async function triggerRefresh(){{
   <div class="section-title">Search Terms — Top Spend → Low Spend</div>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Search Term</th><th>Campaign</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">CPC</th><th class="num">CTR</th><th class="num">Conv.</th><th>Intent</th><th>Action</th></tr></thead>
+      <thead><tr><th>Search Term</th><th>Campaign</th><th>Ad Group</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">CPC</th><th class="num">CTR</th><th class="num">Conv.</th><th>Intent</th><th>Action</th></tr></thead>
       <tbody>{term_rows}</tbody>
     </table>
   </div>
@@ -584,7 +838,7 @@ async function triggerRefresh(){{
 
 <!-- KEYWORD FUNNEL -->
 <div id="tab-funnel" class="tab-content">
-  <div class="section-title">Keyword Funnel — TOFU / MOFU / BOFU</div>
+  <div class="section-title">Keyword Funnel — by Product · Use Case · Ad Group</div>
   {kw_sections}
 </div>
 
@@ -638,12 +892,67 @@ async function triggerRefresh(){{
   </div>
 </div>
 
+<!-- PLAYBOOK -->
+<div id="tab-playbook" class="tab-content">
+  <div class="section-title">⚡ Execution Playbook</div>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:24px">Prioritised actions with copy-paste execution. Check off items as you complete them — progress is saved in your browser.</p>
+
+  <!-- P1: Negative Keywords -->
+  <div class="pb-section">
+    <div class="pb-section-header">
+      <div class="pb-priority pb-p1">P1</div>
+      <div style="flex:1">
+        <h3>Add Negative Keywords</h3>
+        <p>Add these to campaign-level negative keyword lists in Google Ads. Use [exact match] format shown.</p>
+      </div>
+      <button class="copy-btn" onclick="copyEl('neg-master', this)" style="align-self:flex-start">📋 Copy Master List ({len(all_neg_terms)} terms)</button>
+    </div>
+    {neg_camp_blocks}
+    <div class="neg-master-block">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <strong style="font-size:13px">Master List — All Campaigns</strong>
+        <span style="color:var(--muted);font-size:12px">{len(all_neg_terms)} unique terms · exact match</span>
+      </div>
+      <textarea id="neg-master" class="neg-textarea" style="min-height:140px" readonly>{all_neg_text}</textarea>
+    </div>
+  </div>
+
+  <!-- P2: Campaign Actions -->
+  <div class="pb-section">
+    <div class="pb-section-header">
+      <div class="pb-priority pb-p2">P2</div>
+      <div>
+        <h3>Campaign Actions</h3>
+        <p>Sorted by urgency — pause zero-conversion campaigns first to stop budget bleed.</p>
+      </div>
+    </div>
+    <div class="table-wrap" style="margin:0">
+      <table>
+        <thead><tr><th style="width:36px"></th><th>Campaign / Use Case</th><th>Action</th><th>Reason</th><th class="num">Spend</th><th class="num">Conv.</th></tr></thead>
+        <tbody>{action_rows}</tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- P3: Structural Fixes -->
+  <div class="pb-section">
+    <div class="pb-section-header">
+      <div class="pb-priority pb-p3">P3</div>
+      <div>
+        <h3>Structural &amp; Tracking Fixes</h3>
+        <p>One-time fixes that unlock compounding improvements — start with Critical items.</p>
+      </div>
+    </div>
+    {struct_rows}
+  </div>
+</div>
+
 <script>
-function showTab(id){{
+function showTab(id, el){{
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
-  event.target.classList.add('active');
+  if(el) el.classList.add('active');
 }}
 </script>
 </div>
@@ -664,9 +973,8 @@ if __name__ == "__main__":
     score, cats = calc_score(camps, terms, ph)
     print(f"Health score: {score}/100")
 
-    generated_at = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    generated_at = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-    # Inject GH token placeholder — filled by workflow
     gh_token_b64 = os.environ.get("GH_TOKEN_B64", "")
     html = build_html(camps, terms, keywords, ph, score, cats, generated_at)
     html = html.replace("{__GHTOKEN__}", gh_token_b64)
