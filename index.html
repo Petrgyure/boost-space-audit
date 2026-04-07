@@ -24,27 +24,13 @@
   });
 })();
 
-async function triggerRefresh(){
-  const btn=document.getElementById('refresh-btn');
+// Refresh runs in GitHub Actions (daily 05:00 UTC cron + manual trigger).
+// A PAT cannot live in a public static page, so the button opens the Actions page.
+function triggerRefresh(){
   const status=document.getElementById('refresh-status');
-  btn.disabled=true; btn.textContent='⏳ Triggering…';
-  status.textContent='';
-  try{
-    const res=await fetch('https://api.github.com/repos/Petrgyure/boost-space-audit/actions/workflows/refresh.yml/dispatches',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+atob(''),'Accept':'application/vnd.github+json','Content-Type':'application/json'},
-      body:JSON.stringify({'ref':'main'})
-    });
-    if(res.status===204){
-      status.textContent='✅ Refresh triggered! Page will update in ~60s.';
-      status.style.color='#34d399';
-      setTimeout(()=>location.reload(),65000);
-    }else{
-      status.textContent='❌ Error '+res.status+'. Check GitHub Actions.';
-      status.style.color='#f87171';
-    }
-  }catch(e){status.textContent='❌ Network error: '+e.message;status.style.color='#f87171';}
-  btn.disabled=false; btn.textContent='🔄 Refresh Data';
+  window.open('https://github.com/Petrgyure/boost-space-audit/actions/workflows/refresh.yml','_blank');
+  status.textContent='↗ Opened GitHub Actions — click "Run workflow" there.';
+  status.style.color='#9ca3af';
 }
 
 function copyEl(id, btn){
