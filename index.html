@@ -83,8 +83,8 @@ function restoreDoneStates(){
 /* ── Google Ads CSV download data ───────────────────────────────────────── */
 var NEG_CAMP_CSV  = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seona ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo with ai\",\"Negative Exact\"\n\"PIM | Commerce - Dynamic Pricing\",\"\",\"Excluded negative keywords\",\"price tracker\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradewheel\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"usestyle ai seona ai\",\"Negative Exact\"\n\"PIM | Commerce - Supplier Catalog\",\"\",\"Excluded negative keywords\",\"ai dropshipping\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"sell raze\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai seo\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"alli ai\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai keyword vidiq\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"boost ai search\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradelle\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"ai search visibility tool\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"sellvia app\",\"Negative Exact\"\n\"PIM | Commerce - Marketplace Expansion\",\"\",\"Excluded negative keywords\",\"tradewheel website\",\"Negative Exact\"\n\"PIM | Commerce - GEO Catalog\",\"\",\"Excluded negative keywords\",\"seo for ai search engines\",\"Negative Exact\"";
 var NEG_ACCT_CSV  = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai dropshipping\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai keyword vidiq\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai search visibility tool\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai seo\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"alli ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"boost ai search\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"price tracker\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"sell raze\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"sellvia app\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo for ai search engines\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seo with ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"seona ai\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradelle\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradewheel\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"tradewheel website\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"usestyle ai seona ai\",\"Negative Exact\"";
-var ADD_KW_CSV    = "\"Campaign\",\"Ad Group\",\"Keyword\",\"Criterion Type\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"abacus ai\",\"Exact\"\n\"Technology - Data Layer\",\"Database for AI Agents\",\"abacus ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flow ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"blackbox ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"google ai studio\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flova ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"utopia ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Ready Data\",\"flow ai\",\"Exact\"\n\"PIM | Commerce - Dynamic Pricing\",\"Price Optimization\",\"smartscout tool\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"amelia ai\",\"Phrase\"\n\"Technology - Data Layer\",\"Database for AI Agents\",\"flow ai\",\"Phrase\"\n\"PIM | Commerce - Marketplace Expansion\",\"Marketplace Management\",\"deconetwork business hub\",\"Phrase\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flutterflow\",\"Phrase\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"thunkable\",\"Phrase\"\n\"PIM | Commerce - Dynamic Pricing\",\"Competitor Price Monitoring\",\"price competitor analysis\",\"Phrase\"";
-var CAMP_ACT_CSV  = "\"Campaign\",\"Vertical\",\"Use Case\",\"Action\",\"Reason\",\"30d Spend\",\"30d Conv\"\n\"CDP | Marketing - Revenue Attribution\",\"Marketing\",\"Revenue Attribution\",\"Pause\",\"0 conversions, significant spend\",\"\u20ac373\",\"0\"\n\"CDP | Marketing - Dynamic Segmentation\",\"Marketing\",\"Dynamic Segmentation\",\"Pause\",\"0 conversions, significant spend\",\"\u20ac23\",\"0\"\n\"PIM | Commerce - Supplier Catalog\",\"Commerce\",\"Supplier Catalog\",\"Rebuild\",\"Low conv rate at \u20ac225 CPA\",\"\u20ac676\",\"3\"\n\"Search - Database for Make\",\"\",\"Search - Database for Make\",\"Rebuild\",\"Low conv rate at \u20ac94 CPA\",\"\u20ac375\",\"4\"\n\"PIM | Commerce - Dynamic Pricing\",\"Commerce\",\"Dynamic Pricing\",\"Rebuild\",\"Low conv rate at \u20ac109 CPA\",\"\u20ac327\",\"3\"\n\"Technology - Data Layer\",\"\",\"Technology - Data Layer\",\"Scale\",\"165 conv at \u20ac12 CPA\",\"\u20ac1,906\",\"165\"\n\"PIM | Commerce - GEO Catalog\",\"Commerce\",\"GEO Catalog\",\"Scale\",\"9 conv at \u20ac166 CPA\",\"\u20ac1,498\",\"9\"\n\"PIM | Commerce - Marketplace Expansion\",\"Commerce\",\"Marketplace Expansion\",\"Scale\",\"6 conv at \u20ac240 CPA\",\"\u20ac1,441\",\"6\"";
+var ADD_KW_CSV    = "\"Campaign\",\"Ad Group\",\"Keyword\",\"Criterion Type\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"abacus ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"blackbox ai\",\"Exact\"\n\"Technology - Data Layer\",\"Database for AI Agents\",\"abacus ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flow ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"google ai studio\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"utopia ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flova ai\",\"Exact\"\n\"Technology - Data Layer\",\"AI Ready Data\",\"flow ai\",\"Exact\"\n\"PIM | Commerce - Dynamic Pricing\",\"Price Optimization\",\"smartscout tool\",\"Exact\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"amelia ai\",\"Phrase\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"automatizaci\u00f3n inteligente\",\"Phrase\"\n\"Technology - Data Layer\",\"Database for AI Agents\",\"flow ai\",\"Phrase\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"thunkable\",\"Phrase\"\n\"PIM | Commerce - Marketplace Expansion\",\"Marketplace Management\",\"deconetwork business hub\",\"Phrase\"\n\"Technology - Data Layer\",\"AI Agent Automation Platform\",\"flutterflow\",\"Phrase\"\n\"PIM | Commerce - Dynamic Pricing\",\"Competitor Price Monitoring\",\"price competitor analysis\",\"Phrase\"";
+var CAMP_ACT_CSV  = "\"Campaign\",\"Vertical\",\"Use Case\",\"Action\",\"Reason\",\"30d Spend\",\"30d Conv\"\n\"CDP | Marketing - Revenue Attribution\",\"Marketing\",\"Revenue Attribution\",\"Pause\",\"0 conversions, significant spend\",\"\u20ac381\",\"0\"\n\"CDP | Marketing - Dynamic Segmentation\",\"Marketing\",\"Dynamic Segmentation\",\"Pause\",\"0 conversions, significant spend\",\"\u20ac23\",\"0\"\n\"PIM | Commerce - Supplier Catalog\",\"Commerce\",\"Supplier Catalog\",\"Rebuild\",\"Low conv rate at \u20ac230 CPA\",\"\u20ac690\",\"3\"\n\"PIM | Commerce - Dynamic Pricing\",\"Commerce\",\"Dynamic Pricing\",\"Rebuild\",\"Low conv rate at \u20ac109 CPA\",\"\u20ac327\",\"3\"\n\"Search - Database for Make\",\"\",\"Search - Database for Make\",\"Rebuild\",\"Low conv rate at \u20ac79 CPA\",\"\u20ac317\",\"4\"\n\"Technology - Data Layer\",\"\",\"Technology - Data Layer\",\"Scale\",\"190 conv at \u20ac11 CPA\",\"\u20ac2,038\",\"190\"\n\"PIM | Commerce - GEO Catalog\",\"Commerce\",\"GEO Catalog\",\"Scale\",\"9 conv at \u20ac169 CPA\",\"\u20ac1,523\",\"9\"\n\"PIM | Commerce - Marketplace Expansion\",\"Commerce\",\"Marketplace Expansion\",\"Scale\",\"6 conv at \u20ac240 CPA\",\"\u20ac1,441\",\"6\"";
 
 function downloadCSV(filename, data){
   const BOM='﻿';
@@ -201,7 +201,7 @@ function downloadCSV(filename, data){
 <div class="header">
   <div class="header-left">
     <h1>Boost.space — Google Ads Audit</h1>
-    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-04-07 11:59 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
+    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-04-08 06:22 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
   </div>
   <div class="header-right">
     <div style="text-align:center">
@@ -227,8 +227,8 @@ function downloadCSV(filename, data){
 <!-- DASHBOARD -->
 <div id="tab-dashboard" class="tab-content active">
   <div class="grid-4">
-    <div class="card"><div class="card-title">Active Monthly Spend</div><div class="card-value text-red">€6,619</div><div class="card-sub">8 campaigns active</div></div>
-    <div class="card"><div class="card-title">Google Ads Conversions</div><div class="card-value text-red">190</div><div class="card-sub">Reported in last 30 days</div></div>
+    <div class="card"><div class="card-title">Active Monthly Spend</div><div class="card-value text-red">€6,739</div><div class="card-sub">8 campaigns active</div></div>
+    <div class="card"><div class="card-title">Google Ads Conversions</div><div class="card-value text-red">215</div><div class="card-sub">Reported in last 30 days</div></div>
     <div class="card"><div class="card-title">PostHog Paid Convs</div><div class="card-value text-yellow">856</div><div class="card-sub">Micro-convs with GCLID present</div></div>
     <div class="card"><div class="card-title">Paid Bounce Rate</div><div class="card-value text-red">70%</div><div class="card-sub">Avg 1.6 pages/session</div></div>
   </div>
@@ -290,73 +290,73 @@ function downloadCSV(filename, data){
 <tr>
           <td><span class="badge badge-purple" style="margin-right:6px;font-size:10px">CDP</span><strong>Revenue Attribution</strong><div style="font-size:10px;color:var(--muted);margin-top:2px">Marketing</div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">901</td>
-          <td class="num">29</td>
-          <td class="num">3.22%</td>
-          <td class="num"><strong>€373</strong></td>
-          <td class="num">€13</td>
+          <td class="num">942</td>
+          <td class="num">31</td>
+          <td class="num">3.29%</td>
+          <td class="num"><strong>€381</strong></td>
+          <td class="num">€12</td>
           <td class="num">0.0</td>
           <td class="num text-red">∞</td>
-          <td class="num">27.2%<div class="bar-wrap"><div class="bar-fill bar-yellow" style="width:27.2%"></div></div></td>
-          <td class="num">69.8%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:69.8%"></div></div></td>
+          <td class="num">26.5%<div class="bar-wrap"><div class="bar-fill bar-yellow" style="width:26.5%"></div></div></td>
+          <td class="num">70.2%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:70.2%"></div></div></td>
           <td><span class="badge badge-red">Pause</span></td>
         </tr>
 <tr>
           <td><span class="badge badge-purple" style="margin-right:6px;font-size:10px">CDP</span><strong>Dynamic Segmentation</strong><div style="font-size:10px;color:var(--muted);margin-top:2px">Marketing</div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">176</td>
+          <td class="num">182</td>
           <td class="num">2</td>
-          <td class="num">1.14%</td>
+          <td class="num">1.1%</td>
           <td class="num"><strong>€23</strong></td>
           <td class="num">€11</td>
           <td class="num">0.0</td>
           <td class="num text-red">∞</td>
-          <td class="num">35.3%<div class="bar-wrap"><div class="bar-fill bar-yellow" style="width:35.3%"></div></div></td>
-          <td class="num">63.4%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:63.4%"></div></div></td>
+          <td class="num">31.1%<div class="bar-wrap"><div class="bar-fill bar-yellow" style="width:31.1%"></div></div></td>
+          <td class="num">67.9%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:67.9%"></div></div></td>
           <td><span class="badge badge-red">Pause</span></td>
         </tr>
 <tr><td colspan="12" style="background:var(--bg3);padding:8px 12px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px"><span class="badge badge-gray" style="margin-right:8px">Other</span></td></tr>
 <tr>
           <td><strong>Technology - Data Layer</strong><div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">91,235</td>
-          <td class="num">2,803</td>
-          <td class="num">3.07%</td>
-          <td class="num"><strong>€1,906</strong></td>
-          <td class="num">€0.68</td>
-          <td class="num">165.0</td>
-          <td class="num ">€12</td>
+          <td class="num">92,679</td>
+          <td class="num">2,959</td>
+          <td class="num">3.19%</td>
+          <td class="num"><strong>€2,038</strong></td>
+          <td class="num">€0.69</td>
+          <td class="num">190.0</td>
+          <td class="num ">€11</td>
           <td class="num">10.0%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:10.0%"></div></div></td>
-          <td class="num">66.1%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:66.1%"></div></div></td>
+          <td class="num">65.5%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:65.5%"></div></div></td>
           <td><span class="badge badge-yellow">Scale</span></td>
         </tr>
 <tr>
           <td><strong>Search - Database for Make</strong><div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">7,303</td>
-          <td class="num">195</td>
-          <td class="num">2.67%</td>
-          <td class="num"><strong>€375</strong></td>
-          <td class="num">€1.93</td>
+          <td class="num">6,204</td>
+          <td class="num">156</td>
+          <td class="num">2.51%</td>
+          <td class="num"><strong>€317</strong></td>
+          <td class="num">€2.03</td>
           <td class="num">4.0</td>
-          <td class="num ">€94</td>
+          <td class="num ">€79</td>
           <td class="num">10.0%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:10.0%"></div></div></td>
-          <td class="num">34.2%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:34.2%"></div></div></td>
+          <td class="num">31.8%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:31.8%"></div></div></td>
           <td><span class="badge badge-yellow">Rebuild</span></td>
         </tr>
 <tr><td colspan="12" style="background:var(--bg3);padding:8px 12px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px"><span class="badge badge-blue" style="margin-right:8px">PIM</span>Commerce</td></tr>
 <tr>
           <td><span class="badge badge-blue" style="margin-right:6px;font-size:10px">PIM</span><strong>GEO Catalog</strong><div style="font-size:10px;color:var(--muted);margin-top:2px">Commerce</div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">6,969</td>
-          <td class="num">501</td>
-          <td class="num">7.19%</td>
-          <td class="num"><strong>€1,498</strong></td>
-          <td class="num">€2.99</td>
+          <td class="num">7,035</td>
+          <td class="num">505</td>
+          <td class="num">7.18%</td>
+          <td class="num"><strong>€1,523</strong></td>
+          <td class="num">€3.02</td>
           <td class="num">9.0</td>
-          <td class="num ">€166</td>
+          <td class="num ">€169</td>
           <td class="num">11.4%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:11.4%"></div></div></td>
-          <td class="num">66.8%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:66.8%"></div></div></td>
+          <td class="num">66.2%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:66.2%"></div></div></td>
           <td><span class="badge badge-yellow">Scale</span></td>
         </tr>
 <tr>
@@ -376,15 +376,15 @@ function downloadCSV(filename, data){
 <tr>
           <td><span class="badge badge-blue" style="margin-right:6px;font-size:10px">PIM</span><strong>Supplier Catalog</strong><div style="font-size:10px;color:var(--muted);margin-top:2px">Commerce</div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">1,728</td>
-          <td class="num">122</td>
-          <td class="num">7.06%</td>
-          <td class="num"><strong>€676</strong></td>
-          <td class="num">€5.54</td>
+          <td class="num">1,832</td>
+          <td class="num">126</td>
+          <td class="num">6.88%</td>
+          <td class="num"><strong>€690</strong></td>
+          <td class="num">€5.48</td>
           <td class="num">3.0</td>
-          <td class="num ">€225</td>
+          <td class="num ">€230</td>
           <td class="num">10.0%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:10.0%"></div></div></td>
-          <td class="num">26.2%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:26.2%"></div></div></td>
+          <td class="num">30.7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:30.7%"></div></div></td>
           <td><span class="badge badge-yellow">Rebuild</span></td>
         </tr>
 <tr>
@@ -416,11 +416,11 @@ function downloadCSV(filename, data){
           <td><strong>abacus ai</strong></td>
           <td><span style="font-size:11px">Technology - Data Layer</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€280</td>
-          <td class="num">343</td>
+          <td class="num">€314</td>
+          <td class="num">384</td>
           <td class="num">€0.82</td>
-          <td class="num">6.49%</td>
-          <td class="num">49.0</td>
+          <td class="num">6.78%</td>
+          <td class="num">57.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -428,11 +428,11 @@ function downloadCSV(filename, data){
           <td><strong>abacus ai</strong></td>
           <td><span style="font-size:11px">Technology - Data Layer</span></td>
           <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Database for AI Agents</span></td>
-          <td class="num">€122</td>
-          <td class="num">148</td>
-          <td class="num">€0.82</td>
-          <td class="num">8.86%</td>
-          <td class="num">11.0</td>
+          <td class="num">€136</td>
+          <td class="num">167</td>
+          <td class="num">€0.81</td>
+          <td class="num">9.25%</td>
+          <td class="num">12.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -464,10 +464,10 @@ function downloadCSV(filename, data){
           <td><strong>flow ai</strong></td>
           <td><span style="font-size:11px">Technology - Data Layer</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€98</td>
-          <td class="num">135</td>
+          <td class="num">€105</td>
+          <td class="num">144</td>
           <td class="num">€0.73</td>
-          <td class="num">8.71%</td>
+          <td class="num">8.88%</td>
           <td class="num">10.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -476,11 +476,11 @@ function downloadCSV(filename, data){
           <td><strong>blackbox ai</strong></td>
           <td><span style="font-size:11px">Technology - Data Layer</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€71</td>
-          <td class="num">100</td>
-          <td class="num">€0.71</td>
-          <td class="num">6.23%</td>
-          <td class="num">10.0</td>
+          <td class="num">€77</td>
+          <td class="num">109</td>
+          <td class="num">€0.70</td>
+          <td class="num">6.26%</td>
+          <td class="num">14.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -500,11 +500,11 @@ function downloadCSV(filename, data){
           <td><strong>google ai studio</strong></td>
           <td><span style="font-size:11px">Technology - Data Layer</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€52</td>
-          <td class="num">72</td>
-          <td class="num">€0.72</td>
-          <td class="num">5.44%</td>
-          <td class="num">9.0</td>
+          <td class="num">€57</td>
+          <td class="num">77</td>
+          <td class="num">€0.74</td>
+          <td class="num">5.41%</td>
+          <td class="num">10.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -531,6 +531,18 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Fix QS</span></td>
+        </tr>
+<tr>
+          <td><strong>utopia ai</strong></td>
+          <td><span style="font-size:11px">Technology - Data Layer</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€39</td>
+          <td class="num">43</td>
+          <td class="num">€0.91</td>
+          <td class="num">12.76%</td>
+          <td class="num">10.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
           <td><strong>systeme io</strong></td>
@@ -605,18 +617,6 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-yellow">Fix QS</span></td>
         </tr>
 <tr>
-          <td><strong>utopia ai</strong></td>
-          <td><span style="font-size:11px">Technology - Data Layer</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€31</td>
-          <td class="num">36</td>
-          <td class="num">€0.87</td>
-          <td class="num">11.58%</td>
-          <td class="num">8.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-green">Keep</span></td>
-        </tr>
-<tr>
           <td><strong>sell raze</strong></td>
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><span style="font-size:11px">Marketplace Expansion</span></td>
           <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Multi-Channel Ecommerce</span></td>
@@ -627,6 +627,18 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-purple">COMPETITOR</span></td>
           <td><span class="badge badge-red">→ Negative</span></td>
+        </tr>
+<tr>
+          <td><strong>flow ai</strong></td>
+          <td><span style="font-size:11px">Technology - Data Layer</span></td>
+          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">AI Ready Data</span></td>
+          <td class="num">€31</td>
+          <td class="num">44</td>
+          <td class="num">€0.70</td>
+          <td class="num">6.37%</td>
+          <td class="num">4.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
           <td><strong>facebook commerce manager</strong></td>
@@ -677,18 +689,6 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-yellow">Fix QS</span></td>
         </tr>
 <tr>
-          <td><strong>flow ai</strong></td>
-          <td><span style="font-size:11px">Technology - Data Layer</span></td>
-          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">AI Ready Data</span></td>
-          <td class="num">€30</td>
-          <td class="num">42</td>
-          <td class="num">€0.71</td>
-          <td class="num">6.18%</td>
-          <td class="num">4.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-green">Keep</span></td>
-        </tr>
-<tr>
           <td><strong>seo ai</strong></td>
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><span style="font-size:11px">GEO Catalog</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">Generative Engine Optimization</span></td>
@@ -711,6 +711,18 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Fix QS</span></td>
+        </tr>
+<tr>
+          <td><strong>flova ai</strong></td>
+          <td><span style="font-size:11px">Technology - Data Layer</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€28</td>
+          <td class="num">42</td>
+          <td class="num">€0.67</td>
+          <td class="num">16.09%</td>
+          <td class="num">9.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
           <td><strong>geo seo</strong></td>
@@ -749,18 +761,6 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
-          <td><strong>flova ai</strong></td>
-          <td><span style="font-size:11px">Technology - Data Layer</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€26</td>
-          <td class="num">40</td>
-          <td class="num">€0.66</td>
-          <td class="num">15.94%</td>
-          <td class="num">9.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-green">Keep</span></td>
-        </tr>
-<tr>
           <td><strong>page pilot</strong></td>
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><span style="font-size:11px">Supplier Catalog</span></td>
           <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Product Catalog Sync</span></td>
@@ -771,6 +771,18 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Fix QS</span></td>
+        </tr>
+<tr>
+          <td><strong>automatización inteligente</strong></td>
+          <td><span style="font-size:11px">Technology - Data Layer</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€24</td>
+          <td class="num">42</td>
+          <td class="num">€0.58</td>
+          <td class="num">42.86%</td>
+          <td class="num">1.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
           <td><strong>smartscout tool</strong></td>
@@ -911,7 +923,7 @@ function downloadCSV(filename, data){
           <td class="num">€20</td>
           <td class="num">2</td>
           <td class="num">€10</td>
-          <td class="num">11.76%</td>
+          <td class="num">10.53%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -999,18 +1011,6 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-purple">COMPETITOR</span></td>
           <td><span class="badge badge-red">→ Negative</span></td>
-        </tr>
-<tr>
-          <td><strong>vmware mobility</strong></td>
-          <td><span style="font-size:11px">Technology - Data Layer</span></td>
-          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Data Orchestration</span></td>
-          <td class="num">€18</td>
-          <td class="num">22</td>
-          <td class="num">€0.83</td>
-          <td class="num">53.66%</td>
-          <td class="num">0.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-yellow">Keep</span></td>
         </tr></tbody>
     </table>
   </div>
@@ -1548,7 +1548,7 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-purple" style="margin-right:6px;font-size:11px">CDP</span>Revenue Attribution</h3>
-                <span style="color:var(--muted);font-size:12px">62 keywords · €373 spend · 0 conv</span>
+                <span style="color:var(--muted);font-size:12px">62 keywords · €381 spend · 0 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
@@ -1682,7 +1682,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-green bofu" style="font-size:10px">BOFU</span>
                     <span style="font-size:12px;font-weight:600">Attribution Demo & Trial</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €36 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €40 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -1690,8 +1690,8 @@ function downloadCSV(filename, data){
                       <td>customer insight platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€36</td>
-                      <td class="num">11</td>
+                      <td class="num">€40</td>
+                      <td class="num">12</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -1818,11 +1818,20 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-green bofu" style="font-size:10px">BOFU</span>
                     <span style="font-size:12px;font-weight:600">Attribution Software & Pricing</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">18 kws · €0.00 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">18 kws · €4.01 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
                     <tbody><tr>
+                      <td>unified customer data</td>
+                      <td><span class="badge badge-blue">BRO</span></td>
+                      <td><span class="badge badge-gray">—</span></td>
+                      <td class="num">€4.01</td>
+                      <td class="num">1</td>
+                      <td class="num">0.0</td>
+                      <td><span class="badge badge-blue tofu">TOFU</span></td>
+                    </tr>
+<tr>
                       <td>customer insight platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
@@ -1866,15 +1875,6 @@ function downloadCSV(filename, data){
                       <td class="num">0</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
-                    </tr>
-<tr>
-                      <td>unified customer data</td>
-                      <td><span class="badge badge-blue">BRO</span></td>
-                      <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€0.00</td>
-                      <td class="num">0</td>
-                      <td class="num">0.0</td>
-                      <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
 <tr>
                       <td>attribution tool pricing</td>
@@ -2154,14 +2154,14 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-gray" style="margin-right:6px;font-size:11px">Other</span>Search - Database for Make</h3>
-                <span style="color:var(--muted);font-size:12px">423 keywords · €375 spend · 4 conv</span>
+                <span style="color:var(--muted);font-size:12px">423 keywords · €317 spend · 4 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">AI & Agentic Database</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €97 · 3 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €72 · 3 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -2169,8 +2169,8 @@ function downloadCSV(filename, data){
                       <td>ai data enrichment automation</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€46</td>
-                      <td class="num">42</td>
+                      <td class="num">€28</td>
+                      <td class="num">22</td>
                       <td class="num">1.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -2187,8 +2187,8 @@ function downloadCSV(filename, data){
                       <td>database for ai automation</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€22</td>
-                      <td class="num">10</td>
+                      <td class="num">€14</td>
+                      <td class="num">7</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -2705,7 +2705,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span>
                     <span style="font-size:12px;font-weight:600">Cross-Platform</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">8 kws · €14 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">8 kws · €7.18 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -2713,8 +2713,8 @@ function downloadCSV(filename, data){
                       <td>automation database no-code</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€14</td>
-                      <td class="num">6</td>
+                      <td class="num">€7.18</td>
+                      <td class="num">3</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -3032,7 +3032,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Data Modeling & Dedup</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €14 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €12 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -3040,8 +3040,8 @@ function downloadCSV(filename, data){
                       <td>no-code data modeling</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€14</td>
-                      <td class="num">6</td>
+                      <td class="num">€12</td>
+                      <td class="num">5</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -3394,7 +3394,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Database for Make</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €176 · 1 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €160 · 1 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -3402,8 +3402,8 @@ function downloadCSV(filename, data){
                       <td>make database</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€168</td>
-                      <td class="num">80</td>
+                      <td class="num">€156</td>
+                      <td class="num">75</td>
                       <td class="num">1.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -3411,8 +3411,8 @@ function downloadCSV(filename, data){
                       <td>database for make</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€7.70</td>
-                      <td class="num">4</td>
+                      <td class="num">€4.83</td>
+                      <td class="num">2</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -3648,7 +3648,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">MCP & Vector Storage</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €60 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €53 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -3656,8 +3656,8 @@ function downloadCSV(filename, data){
                       <td>mcp database for ai agents</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€46</td>
-                      <td class="num">20</td>
+                      <td class="num">€39</td>
+                      <td class="num">16</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -3784,7 +3784,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">SSOT & Master Database</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">9 kws · €11 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">9 kws · €9.73 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -3801,8 +3801,8 @@ function downloadCSV(filename, data){
                       <td>single source of truth database</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€3.49</td>
-                      <td class="num">2</td>
+                      <td class="num">€2.45</td>
+                      <td class="num">1</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -4473,7 +4473,7 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-gray" style="margin-right:6px;font-size:11px">Other</span>Technology - Data Layer</h3>
-                <span style="color:var(--muted);font-size:12px">346 keywords · €1,906 spend · 165 conv</span>
+                <span style="color:var(--muted);font-size:12px">346 keywords · €2,038 spend · 190 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
@@ -4535,7 +4535,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Agent Automation Platform</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">13 kws · €1,051 · 125 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">13 kws · €1,152 · 148 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -4543,45 +4543,45 @@ function downloadCSV(filename, data){
                       <td>agentic ai platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€321</td>
-                      <td class="num">449</td>
-                      <td class="num">34.0</td>
+                      <td class="num">€346</td>
+                      <td class="num">480</td>
+                      <td class="num">39.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
                       <td>ai agent orchestration platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€307</td>
-                      <td class="num">412</td>
-                      <td class="num">36.0</td>
+                      <td class="num">€329</td>
+                      <td class="num">440</td>
+                      <td class="num">41.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
                       <td>no-code ai agent platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€220</td>
-                      <td class="num">250</td>
-                      <td class="num">29.0</td>
+                      <td class="num">€246</td>
+                      <td class="num">280</td>
+                      <td class="num">36.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
                       <td>ai agent automation platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€119</td>
-                      <td class="num">185</td>
-                      <td class="num">18.0</td>
+                      <td class="num">€131</td>
+                      <td class="num">202</td>
+                      <td class="num">21.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
                       <td>ai agent workflow platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€60</td>
-                      <td class="num">91</td>
-                      <td class="num">6.0</td>
+                      <td class="num">€71</td>
+                      <td class="num">103</td>
+                      <td class="num">9.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
@@ -4589,7 +4589,7 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€23</td>
-                      <td class="num">36</td>
+                      <td class="num">37</td>
                       <td class="num">2.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -4597,8 +4597,8 @@ function downloadCSV(filename, data){
                       <td>agentic automation platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€2.37</td>
-                      <td class="num">6</td>
+                      <td class="num">€4.83</td>
+                      <td class="num">10</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -5116,7 +5116,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Data Transformation</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">13 kws · €14 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">13 kws · €15 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -5124,8 +5124,8 @@ function downloadCSV(filename, data){
                       <td>ai data transformation platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€14</td>
-                      <td class="num">20</td>
+                      <td class="num">€15</td>
+                      <td class="num">21</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -5497,7 +5497,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Ready Data</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €165 · 15 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €169 · 15 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -5506,7 +5506,7 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€66</td>
-                      <td class="num">98</td>
+                      <td class="num">99</td>
                       <td class="num">6.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -5514,8 +5514,8 @@ function downloadCSV(filename, data){
                       <td>ai ready data platform</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-yellow">3</span></td>
-                      <td class="num">€44</td>
-                      <td class="num">62</td>
+                      <td class="num">€47</td>
+                      <td class="num">63</td>
                       <td class="num">3.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -5523,8 +5523,8 @@ function downloadCSV(filename, data){
                       <td>ai ready data infrastructure</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€33</td>
-                      <td class="num">56</td>
+                      <td class="num">€34</td>
+                      <td class="num">57</td>
                       <td class="num">4.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -5532,8 +5532,8 @@ function downloadCSV(filename, data){
                       <td>data readiness for ai</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€20</td>
-                      <td class="num">41</td>
+                      <td class="num">€21</td>
+                      <td class="num">42</td>
                       <td class="num">2.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -6332,7 +6332,7 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€82</td>
-                      <td class="num">161</td>
+                      <td class="num">162</td>
                       <td class="num">2.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -6504,7 +6504,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Database for AI Agents</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €236 · 17 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €263 · 19 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -6512,17 +6512,17 @@ function downloadCSV(filename, data){
                       <td>database for ai agents</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-yellow">3</span></td>
-                      <td class="num">€109</td>
-                      <td class="num">160</td>
-                      <td class="num">8.0</td>
+                      <td class="num">€118</td>
+                      <td class="num">171</td>
+                      <td class="num">9.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
 <tr>
                       <td>data platform for ai agents</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€69</td>
-                      <td class="num">92</td>
+                      <td class="num">€78</td>
+                      <td class="num">101</td>
                       <td class="num">6.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
@@ -6530,9 +6530,9 @@ function downloadCSV(filename, data){
                       <td>agentic database</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-yellow">3</span></td>
-                      <td class="num">€58</td>
-                      <td class="num">83</td>
-                      <td class="num">3.0</td>
+                      <td class="num">€66</td>
+                      <td class="num">90</td>
+                      <td class="num">4.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
 <tr>
@@ -8243,7 +8243,7 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-blue" style="margin-right:6px;font-size:11px">PIM</span>GEO Catalog</h3>
-                <span style="color:var(--muted);font-size:12px">74 keywords · €1,498 spend · 9 conv</span>
+                <span style="color:var(--muted);font-size:12px">74 keywords · €1,523 spend · 9 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
@@ -8341,7 +8341,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Product Discoverability</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €325 · 2 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €344 · 2 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -8353,6 +8353,15 @@ function downloadCSV(filename, data){
                       <td class="num">70</td>
                       <td class="num">2.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
+                    </tr>
+<tr>
+                      <td>product data automation platform</td>
+                      <td><span class="badge badge-blue">BRO</span></td>
+                      <td><span class="badge badge-gray">—</span></td>
+                      <td class="num">€19</td>
+                      <td class="num">2</td>
+                      <td class="num">0.0</td>
+                      <td><span class="badge badge-yellow mofu">MOFU</span></td>
                     </tr>
 <tr>
                       <td>product visibility ai search</td>
@@ -8515,15 +8524,6 @@ function downloadCSV(filename, data){
                       <td class="num">0</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
-                    </tr>
-<tr>
-                      <td>boost product discoverability ecommerce AI</td>
-                      <td><span class="badge badge-green">EXA</span></td>
-                      <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€0.00</td>
-                      <td class="num">0</td>
-                      <td class="num">0.0</td>
-                      <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr></tbody>
                   </table>
                 </div>
@@ -8531,7 +8531,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span>
                     <span style="font-size:12px;font-weight:600">Generative Engine Optimization</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €1,140 · 7 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €1,145 · 7 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -8539,8 +8539,8 @@ function downloadCSV(filename, data){
                       <td>optimize for generative search</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€725</td>
-                      <td class="num">172</td>
+                      <td class="num">€728</td>
+                      <td class="num">173</td>
                       <td class="num">6.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -8557,8 +8557,8 @@ function downloadCSV(filename, data){
                       <td>generative search optimization</td>
                       <td><span class="badge badge-green">EXA</span></td>
                       <td><span class="badge badge-red">1</span></td>
-                      <td class="num">€97</td>
-                      <td class="num">29</td>
+                      <td class="num">€99</td>
+                      <td class="num">30</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -9463,14 +9463,14 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-blue" style="margin-right:6px;font-size:11px">PIM</span>Supplier Catalog</h3>
-                <span style="color:var(--muted);font-size:12px">36 keywords · €676 spend · 3 conv</span>
+                <span style="color:var(--muted);font-size:12px">36 keywords · €690 spend · 3 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Duplicate Product Detection</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">9 kws · €434 · 1 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">9 kws · €444 · 1 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -9478,8 +9478,8 @@ function downloadCSV(filename, data){
                       <td>ai search optimization ecommerce</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€310</td>
-                      <td class="num">56</td>
+                      <td class="num">€321</td>
+                      <td class="num">59</td>
                       <td class="num">1.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -9561,7 +9561,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Product Catalog Sync</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">11 kws · €243 · 2 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">11 kws · €246 · 2 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -9569,8 +9569,8 @@ function downloadCSV(filename, data){
                       <td>generative engine optimization</td>
                       <td><span class="badge badge-blue">BRO</span></td>
                       <td><span class="badge badge-yellow">3</span></td>
-                      <td class="num">€243</td>
-                      <td class="num">39</td>
+                      <td class="num">€246</td>
+                      <td class="num">40</td>
                       <td class="num">2.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -10065,8 +10065,8 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-purple" style="margin-right:4px;font-size:10px">CDP</span><strong>Revenue Attribution</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px">Marketing</div></td>
           <td><span class="badge badge-red">Pause</span></td>
-          <td style="color:var(--muted);font-size:12px">0 conversions on €373 spend — stop budget bleed</td>
-          <td class="num" style="white-space:nowrap">€373</td>
+          <td style="color:var(--muted);font-size:12px">0 conversions on €381 spend — stop budget bleed</td>
+          <td class="num" style="white-space:nowrap">€381</td>
           <td class="num">0</td>
         </tr><tr id="pb-row-1" class="pb-action-row">
           <td style="width:36px;text-align:center">
@@ -10085,22 +10085,12 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><strong>Supplier Catalog</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px">Commerce</div></td>
           <td><span class="badge badge-yellow">Rebuild</span></td>
-          <td style="color:var(--muted);font-size:12px">Only 3 conv at €225 CPA — restructure ad groups</td>
-          <td class="num" style="white-space:nowrap">€676</td>
+          <td style="color:var(--muted);font-size:12px">Only 3 conv at €230 CPA — restructure ad groups</td>
+          <td class="num" style="white-space:nowrap">€690</td>
           <td class="num">3</td>
         </tr><tr id="pb-row-3" class="pb-action-row">
           <td style="width:36px;text-align:center">
             <input type="checkbox" class="done-cb" data-id="pb-act-3" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
-          </td>
-          <td><strong>Search - Database for Make</strong>
-            <div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
-          <td><span class="badge badge-yellow">Rebuild</span></td>
-          <td style="color:var(--muted);font-size:12px">Only 4 conv at €94 CPA — restructure ad groups</td>
-          <td class="num" style="white-space:nowrap">€375</td>
-          <td class="num">4</td>
-        </tr><tr id="pb-row-4" class="pb-action-row">
-          <td style="width:36px;text-align:center">
-            <input type="checkbox" class="done-cb" data-id="pb-act-4" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
           </td>
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><strong>Dynamic Pricing</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px">Commerce</div></td>
@@ -10108,6 +10098,16 @@ function downloadCSV(filename, data){
           <td style="color:var(--muted);font-size:12px">Only 3 conv at €109 CPA — restructure ad groups</td>
           <td class="num" style="white-space:nowrap">€327</td>
           <td class="num">3</td>
+        </tr><tr id="pb-row-4" class="pb-action-row">
+          <td style="width:36px;text-align:center">
+            <input type="checkbox" class="done-cb" data-id="pb-act-4" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
+          </td>
+          <td><strong>Search - Database for Make</strong>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
+          <td><span class="badge badge-yellow">Rebuild</span></td>
+          <td style="color:var(--muted);font-size:12px">Only 4 conv at €79 CPA — restructure ad groups</td>
+          <td class="num" style="white-space:nowrap">€317</td>
+          <td class="num">4</td>
         </tr><tr id="pb-row-5" class="pb-action-row">
           <td style="width:36px;text-align:center">
             <input type="checkbox" class="done-cb" data-id="pb-act-5" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
@@ -10115,9 +10115,9 @@ function downloadCSV(filename, data){
           <td><strong>Technology - Data Layer</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
           <td><span class="badge badge-green">Scale</span></td>
-          <td style="color:var(--muted);font-size:12px">165 conversions at €12 CPA — increase daily budget</td>
-          <td class="num" style="white-space:nowrap">€1,906</td>
-          <td class="num">165</td>
+          <td style="color:var(--muted);font-size:12px">190 conversions at €11 CPA — increase daily budget</td>
+          <td class="num" style="white-space:nowrap">€2,038</td>
+          <td class="num">190</td>
         </tr><tr id="pb-row-6" class="pb-action-row">
           <td style="width:36px;text-align:center">
             <input type="checkbox" class="done-cb" data-id="pb-act-6" onchange="toggleDone(this)" style="width:16px;height:16px;cursor:pointer">
@@ -10125,8 +10125,8 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-blue" style="margin-right:4px;font-size:10px">PIM</span><strong>GEO Catalog</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px">Commerce</div></td>
           <td><span class="badge badge-green">Scale</span></td>
-          <td style="color:var(--muted);font-size:12px">9 conversions at €166 CPA — increase daily budget</td>
-          <td class="num" style="white-space:nowrap">€1,498</td>
+          <td style="color:var(--muted);font-size:12px">9 conversions at €169 CPA — increase daily budget</td>
+          <td class="num" style="white-space:nowrap">€1,523</td>
           <td class="num">9</td>
         </tr><tr id="pb-row-7" class="pb-action-row">
           <td style="width:36px;text-align:center">
@@ -10225,10 +10225,10 @@ function downloadCSV(filename, data){
     <div class="pb-priority" style="background:rgba(99,102,241,0.2);color:#a78bfa;border:1px solid rgba(99,102,241,0.3);font-size:14px;font-weight:800;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">P4</div>
     <div style="flex:1">
       <h3>Add Targeted Keywords</h3>
-      <p>Converting search terms (15) not yet in your keyword lists — add as Exact or Phrase match to capture them explicitly.</p>
+      <p>Converting search terms (16) not yet in your keyword lists — add as Exact or Phrase match to capture them explicitly.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;min-width:200px">
-      <button class="copy-btn" style="background:linear-gradient(135deg,#a78bfa,#6366f1)" onclick="downloadCSV('add_keywords.csv', ADD_KW_CSV)">⬇ Keywords CSV (15 rows)</button>
+      <button class="copy-btn" style="background:linear-gradient(135deg,#a78bfa,#6366f1)" onclick="downloadCSV('add_keywords.csv', ADD_KW_CSV)">⬇ Keywords CSV (16 rows)</button>
       <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.4">Exact = 2+ conversions<br>Phrase = 1 conversion</div>
     </div>
   </div>
