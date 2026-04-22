@@ -10,7 +10,7 @@ GADS_CONFIG = {
     "client_id":        os.environ["GADS_CLIENT_ID"],
     "client_secret":    os.environ["GADS_CLIENT_SECRET"],
     "developer_token":  os.environ["GADS_DEV_TOKEN"],
-    "login_customer_id":os.environ["GADS_LOGIN_CID"],
+    "login_customer_id":os.environ["GADS_LOGIN_CID"].replace("-", ""),
     "refresh_token":    os.environ["GADS_REFRESH_TOKEN"],
     "use_proto_plus":   True,
 }
@@ -200,6 +200,225 @@ def pull_posthog():
         print(f"  ⚠️  PostHog unavailable ({e}) — using stub. Update POSTHOG_KEY in ACCESS.md.")
         return POSTHOG_STUB
 
+# ── RLSA / Extensions / Shared Negatives constants ───────────────────────────
+SHARED_NEG_LIST_ID = "12011903840"   # "Competitors + Irrelevant" — linked to all 9 campaigns
+
+RLSA_RECS = [
+    {"id": "7565330762", "name": "all - 540",                      "adj": +20,  "action": "observe",  "note": "All visitors 540-day window"},
+    {"id": "7566114910", "name": "all - 7",                        "adj": +40,  "action": "observe",  "note": "Recent 7-day visitors — high intent"},
+    {"id": "7277020330", "name": "AdWords optimized list",         "adj": +15,  "action": "observe",  "note": "Google smart remarketing list"},
+    {"id": "8144411558", "name": "All Users of Boost.space Master","adj": -100, "action": "exclude",  "note": "Existing platform users — exclude from prospecting"},
+    {"id": "7278536549", "name": "All Converters",                 "adj": -100, "action": "exclude",  "note": "Already converted — exclude to avoid waste"},
+]
+
+CAMP_TARGET_GROUP = {
+    ("CDP",    "Marketing"):  "Marketing Ops / CMO / CDP Evaluator",
+    ("PIM",    "Commerce"):   "E-commerce Manager / Marketplace Seller / Product Ops",
+    ("Search", "Technology"): "Developer / IT Director / Data Ops",
+}
+
+LANDING_PAGES = {
+    "CDP | Marketing - AI Personalized Activation": "https://boost.space/solutions/marketing/ai-personalized-activation",
+    "CDP | Marketing - Dynamic Segmentation":       "https://boost.space/solutions/marketing/dynamic-segmentation",
+    "CDP | Marketing - Revenue Attribution":        "https://boost.space/solutions/marketing/real-time-revenue-attribution",
+    "CDP | Marketing - Unified Customer Profiles":  "https://boost.space/solutions/marketing/unified-customer-profiles",
+    "PIM | Commerce - Dynamic Pricing":             "https://boost.space/solutions/commerce/dynamic-pricing",
+    "PIM | Commerce - GEO Catalog":                 "https://boost.space/solutions/commerce/geo-ai-catalog-optimization",
+    "PIM | Commerce - Marketplace Expansion":       "https://boost.space/solutions/commerce/marketplace-expansion",
+    "PIM | Commerce - Supplier Catalog":            "https://boost.space/solutions/commerce/supplier-catalog-automation",
+    "Search | Technology | EN":                     "https://boost.space/",
+}
+
+_BSU = "https://boost.space"
+CAMP_SITELINKS = {
+    "CDP | Marketing - AI Personalized Activation": [
+        ("Book a Demo",     "See it live in 30 minutes",        "No setup required",           f"{_BSU}/book-demo"),
+        ("See Pricing",     "Transparent, modular pricing",     "Scale as you grow",           f"{_BSU}/pricing"),
+        ("Customer Stories","How teams automate personalization","Real results, real use cases",f"{_BSU}/case-studies"),
+        ("Compare Plans",   "Find the right plan for your team","Free trial included",          f"{_BSU}/pricing"),
+    ],
+    "CDP | Marketing - Dynamic Segmentation": [
+        ("Book a Demo",      "See dynamic segments in action", "Live in 30 minutes",           f"{_BSU}/book-demo"),
+        ("See Pricing",      "Transparent, modular pricing",   "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Segmentation Guide","Build smarter audience segments","With AI and real-time data",  f"{_BSU}/blog"),
+        ("Compare Plans",    "Find the right plan for your team","Free trial included",         f"{_BSU}/pricing"),
+    ],
+    "CDP | Marketing - Revenue Attribution": [
+        ("Book a Demo",      "See attribution in action",      "30-minute live walkthrough",   f"{_BSU}/book-demo"),
+        ("See Pricing",      "Transparent, modular pricing",   "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Attribution Guide","Multi-touch attribution explained","Connect spend to revenue",   f"{_BSU}/blog"),
+        ("Compare Plans",    "Find the right plan for your team","Free trial included",         f"{_BSU}/pricing"),
+    ],
+    "CDP | Marketing - Unified Customer Profiles": [
+        ("Book a Demo",      "See unified profiles live",      "30-minute walkthrough",        f"{_BSU}/book-demo"),
+        ("See Pricing",      "Transparent, modular pricing",   "Scale as you grow",            f"{_BSU}/pricing"),
+        ("CDP Buyer's Guide","What to look for in a CDP",      "Free guide for evaluators",    f"{_BSU}/blog"),
+        ("Compare Plans",    "Find the right plan for your team","Free trial included",         f"{_BSU}/pricing"),
+    ],
+    "PIM | Commerce - Dynamic Pricing": [
+        ("Book a Demo",     "See repricing in action",         "Live in 30 minutes",           f"{_BSU}/book-demo"),
+        ("See Pricing",     "Transparent, modular pricing",    "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Repricing Guide", "Automate competitive pricing",    "Across all channels",          f"{_BSU}/blog"),
+        ("Compare Plans",   "Find the right plan for your team","Free trial included",          f"{_BSU}/pricing"),
+    ],
+    "PIM | Commerce - GEO Catalog": [
+        ("Book a Demo",     "See GEO catalog optimization",    "Live in 30 minutes",           f"{_BSU}/book-demo"),
+        ("See Pricing",     "Transparent, modular pricing",    "Scale as you grow",            f"{_BSU}/pricing"),
+        ("GEO AI Guide",    "Optimize for AI-powered search",  "Stay visible in LLMs",         f"{_BSU}/blog"),
+        ("Compare Plans",   "Find the right plan for your team","Free trial included",          f"{_BSU}/pricing"),
+    ],
+    "PIM | Commerce - Marketplace Expansion": [
+        ("Book a Demo",       "See marketplace automation",    "Live in 30 minutes",           f"{_BSU}/book-demo"),
+        ("See Pricing",       "Transparent, modular pricing",  "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Marketplace Guide", "Expand to new channels faster", "Automate product feeds",       f"{_BSU}/blog"),
+        ("Compare Plans",     "Find the right plan for your team","Free trial included",        f"{_BSU}/pricing"),
+    ],
+    "PIM | Commerce - Supplier Catalog": [
+        ("Book a Demo",       "See supplier sync live",        "30-minute walkthrough",        f"{_BSU}/book-demo"),
+        ("See Pricing",       "Transparent, modular pricing",  "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Integration Guide", "Connect any supplier feed",     "No-code data mapping",         f"{_BSU}/blog"),
+        ("Compare Plans",     "Find the right plan for your team","Free trial included",        f"{_BSU}/pricing"),
+    ],
+    "Search | Technology | EN": [
+        ("Book a Demo",    "See Boost.space in action",        "30-minute live demo",          f"{_BSU}/book-demo"),
+        ("See Pricing",    "Transparent, modular pricing",     "Scale as you grow",            f"{_BSU}/pricing"),
+        ("Documentation",  "Full API and integration docs",    "For developers and admins",    f"{_BSU}/docs"),
+        ("Case Studies",   "How tech teams use Boost.space",   "Real results from real teams", f"{_BSU}/case-studies"),
+    ],
+}
+
+UNIVERSAL_CALLOUTS = [
+    "No-code setup", "14-day free trial", "GDPR compliant",
+    "EU data residency", "SOC 2 certified", "Live support",
+    "API access included", "Free onboarding",
+]
+
+CAMP_SNIPPETS = {
+    "CDP | Marketing - AI Personalized Activation": ("Features", "AI Personalization;Audience Segments;Predictive Analytics;Real-time Data;Multi-channel Activation"),
+    "CDP | Marketing - Dynamic Segmentation":       ("Features", "Dynamic Segments;Behavioral Targeting;Lookalike Audiences;Real-time Sync;Cross-channel Segments"),
+    "CDP | Marketing - Revenue Attribution":        ("Features", "Multi-touch Attribution;Revenue Tracking;Campaign ROI;Conversion Paths;Data-driven Attribution"),
+    "CDP | Marketing - Unified Customer Profiles":  ("Features", "Unified Profiles;First-party Data;Identity Resolution;360-degree View;Real-time Updates"),
+    "PIM | Commerce - Dynamic Pricing":             ("Features", "Real-time Repricing;Competitor Monitoring;AI Price Optimization;Multi-channel Sync;Price Rules Engine"),
+    "PIM | Commerce - GEO Catalog":                 ("Features", "AI Catalog Optimization;GEO Visibility;Schema Markup;Product Discovery;LLM Optimization"),
+    "PIM | Commerce - Marketplace Expansion":       ("Features", "Multi-marketplace Sync;Product Feed Automation;Channel Management;Listing Optimization;Profitability Tracking"),
+    "PIM | Commerce - Supplier Catalog":            ("Features", "Supplier Feed Sync;Data Normalization;Deduplication;Catalog Automation;API Integrations"),
+    "Search | Technology | EN":                     ("Services", "CDP Marketing;PIM Commerce;Data Unification;AI Automation;API Integrations"),
+}
+
+
+def pull_user_lists():
+    """Pull available remarketing/audience lists with search sizes."""
+    from google.ads.googleads.client import GoogleAdsClient
+    client = GoogleAdsClient.load_from_dict(GADS_CONFIG)
+    svc = client.get_service("GoogleAdsService")
+    result = []
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT user_list.id, user_list.name, user_list.type, user_list.size_for_search
+            FROM user_list WHERE user_list.membership_status = 'OPEN'
+            ORDER BY user_list.size_for_search DESC
+        """):
+            ul = row.user_list
+            result.append({"id": str(ul.id), "name": ul.name,
+                           "type": ul.type.name, "search_size": ul.size_for_search})
+    except Exception as e:
+        print(f"  ⚠️  pull_user_lists: {e}")
+    return result
+
+
+def pull_rlsa_assignments():
+    """Pull existing RLSA/audience targeting per ad group."""
+    from google.ads.googleads.client import GoogleAdsClient
+    client = GoogleAdsClient.load_from_dict(GADS_CONFIG)
+    svc = client.get_service("GoogleAdsService")
+    result = []
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT campaign.name, ad_group.name,
+                   ad_group_criterion.user_list.user_list,
+                   ad_group_criterion.bid_modifier
+            FROM ad_group_criterion
+            WHERE campaign.status = 'ENABLED' AND ad_group_criterion.type = 'USER_LIST'
+        """):
+            result.append({
+                "campaign": row.campaign.name,
+                "adgroup":  row.ad_group.name,
+                "list_res": row.ad_group_criterion.user_list.user_list,
+                "bid_mod":  row.ad_group_criterion.bid_modifier,
+            })
+    except Exception as e:
+        print(f"  ⚠️  pull_rlsa_assignments: {e}")
+    return result
+
+
+def pull_assets():
+    """Pull current sitelinks, callouts, structured snippets and campaign assignments."""
+    from google.ads.googleads.client import GoogleAdsClient
+    client = GoogleAdsClient.load_from_dict(GADS_CONFIG)
+    svc = client.get_service("GoogleAdsService")
+    sitelinks, callouts, snippets, assignments = [], [], [], {}
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT asset.id, asset.sitelink_asset.link_text,
+                   asset.sitelink_asset.description1, asset.sitelink_asset.description2
+            FROM asset WHERE asset.type = 'SITELINK' LIMIT 200
+        """):
+            a = row.asset.sitelink_asset
+            sitelinks.append({"link_text": a.link_text, "desc1": a.description1, "desc2": a.description2})
+    except Exception as e:
+        print(f"  ⚠️  pull_assets/sitelinks: {e}")
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT asset.callout_asset.callout_text FROM asset WHERE asset.type = 'CALLOUT' LIMIT 200
+        """):
+            callouts.append(row.asset.callout_asset.callout_text)
+    except Exception as e:
+        print(f"  ⚠️  pull_assets/callouts: {e}")
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT asset.structured_snippet_asset.header, asset.structured_snippet_asset.values
+            FROM asset WHERE asset.type = 'STRUCTURED_SNIPPET' LIMIT 100
+        """):
+            s = row.asset.structured_snippet_asset
+            snippets.append({"header": s.header, "values": list(s.values)})
+    except Exception as e:
+        print(f"  ⚠️  pull_assets/snippets: {e}")
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query="""
+            SELECT campaign.name, campaign_asset.field_type, campaign.status
+            FROM campaign_asset
+            WHERE campaign.status = 'ENABLED' AND campaign_asset.status = 'ENABLED'
+            ORDER BY campaign.name
+        """):
+            cn = row.campaign.name
+            ft = row.campaign_asset.field_type.name
+            assignments.setdefault(cn, [])
+            if ft not in assignments[cn]:
+                assignments[cn].append(ft)
+    except Exception as e:
+        print(f"  ⚠️  pull_assets/assignments: {e}")
+    return {"sitelinks": sitelinks, "callouts": callouts, "snippets": snippets, "assignments": assignments}
+
+
+def pull_shared_neg_list():
+    """Pull contents of the shared 'Competitors + Irrelevant' negative keyword list."""
+    from google.ads.googleads.client import GoogleAdsClient
+    client = GoogleAdsClient.load_from_dict(GADS_CONFIG)
+    svc = client.get_service("GoogleAdsService")
+    terms = []
+    try:
+        for row in svc.search(customer_id=CUSTOMER_ID, query=f"""
+            SELECT shared_criterion.keyword.text, shared_criterion.keyword.match_type
+            FROM shared_criterion WHERE shared_set.id = {SHARED_NEG_LIST_ID}
+            ORDER BY shared_criterion.keyword.text
+        """):
+            kw = row.shared_criterion.keyword
+            terms.append({"text": kw.text, "match_type": kw.match_type.name})
+    except Exception as e:
+        print(f"  ⚠️  pull_shared_neg_list: {e}")
+    return terms
+
+
 # ── Classify search terms ─────────────────────────────────────────────────────
 COMPETITOR  = {"seona","alli ai","usestyle","tradewheel","tradelle","sellvia","sellhub",
                "selleraider","neobund","crosslister","helium 10","propensity ai",
@@ -295,7 +514,8 @@ def calc_score(camps, terms, ph):
                              "ads": ads, "settings": settings}
 
 # ── HTML builder ──────────────────────────────────────────────────────────────
-def build_html(camps, terms, keywords, ph, score, cats, generated_at):
+def build_html(camps, terms, keywords, ph, score, cats, generated_at,
+               user_lists=None, rlsa_assignments=None, assets=None, shared_neg_list=None):
     total_spend_czk = sum(c["cost_czk"] for c in camps)
     total_spend_eur = eur(total_spend_czk)
     total_conv      = sum(c["conv"] for c in camps)
@@ -629,6 +849,203 @@ def build_html(camps, terms, keywords, ph, score, cats, generated_at):
           </div>
         </div>"""
 
+    # ── Shared negative list delta ────────────────────────────────────────────
+    if shared_neg_list is None:  shared_neg_list  = []
+    if user_lists      is None:  user_lists       = []
+    if rlsa_assignments is None: rlsa_assignments = []
+    if assets          is None:  assets           = {"sitelinks": [], "callouts": [], "snippets": [], "assignments": {}}
+
+    shared_neg_texts      = {t["text"].lower() for t in shared_neg_list}
+    shared_neg_delta      = [t for t in all_neg_terms if t.lower() not in shared_neg_texts]
+    shared_in_list        = {t for t in all_neg_terms if t.lower() in shared_neg_texts}
+    shared_neg_delta_count = len(shared_neg_delta)
+    shared_in_list_count   = len(shared_in_list)
+
+    shared_neg_delta_rows = [["Shared Set Name", "Keyword", "Match Type", "Action"]]
+    for _t in shared_neg_delta:
+        shared_neg_delta_rows.append(["Competitors + Irrelevant", _t, "Broad", "Add"])
+    shared_neg_delta_csv_js  = to_csv_js(shared_neg_delta_rows)
+    shared_neg_delta_text    = "\n".join(shared_neg_delta)
+
+    shared_term_pills = ""
+    for _t in sorted(all_neg_terms):
+        if _t in shared_in_list:
+            shared_term_pills += f'<span class="badge badge-green" style="font-size:10px;margin-right:4px;margin-bottom:4px">✓ {_t}</span>'
+        else:
+            shared_term_pills += f'<span class="badge badge-yellow" style="font-size:10px;margin-right:4px;margin-bottom:4px">+ {_t}</span>'
+
+    shared_delta_btn = ""
+    if shared_neg_delta:
+        shared_delta_btn = (f'<button class="copy-btn" style="margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#d97706)" '
+                            f"""onclick="downloadCSV('shared_neg_delta.csv', SHARED_NEG_DELTA)">"""
+                            f'⬇ Export {shared_neg_delta_count} new terms CSV</button>')
+
+    shared_delta_textarea = ""
+    if shared_neg_delta:
+        shared_delta_textarea = f'<textarea class="neg-textarea" style="min-height:80px;margin-top:8px" readonly>{shared_neg_delta_text}</textarea>'
+
+    # ── RLSA tab HTML ─────────────────────────────────────────────────────────
+    user_list_map  = {ul["id"]: ul for ul in user_lists}
+    assigned_rlsa  = {}
+    for _a in rlsa_assignments:
+        _key = (_a["campaign"], _a["adgroup"])
+        assigned_rlsa.setdefault(_key, []).append(_a["list_res"])
+
+    camp_adgroups = {}
+    for _k in keywords:
+        camp_adgroups.setdefault(_k["campaign"], set()).add(_k["adgroup"])
+
+    rlsa_csv_rows = [["Campaign", "Ad Group", "Audience", "Bid Adjustment", "Target Method"]]
+    rlsa_tab_html = ""
+    camp_order = sorted(camps, key=lambda c: (parse_camp_name(c["name"])["product"], c["name"]))
+
+    for _c in camp_order:
+        _pn  = parse_camp_name(_c["name"])
+        _tg  = CAMP_TARGET_GROUP.get((_pn["product"], _pn["vertical"]), "General")
+        _lp  = LANDING_PAGES.get(_c["name"], "https://boost.space/")
+        _lps = _lp.replace("https://boost.space", "") or "/"
+        _ags = sorted(camp_adgroups.get(_c["name"], {"(default)"}))
+        _pb  = f'<span class="badge {_pn["badge"]}" style="font-size:11px">{_pn["product"]}</span>'
+        _cur = sum(1 for ag in _ags if (_c["name"], ag) in assigned_rlsa)
+        _rlsa_status = (f'<span class="badge badge-red" style="font-size:11px">❌ None configured</span>'
+                        if _cur == 0 else
+                        f'<span class="badge badge-green" style="font-size:11px">✓ {_cur} active</span>')
+
+        _rec_rows = ""
+        for _ag in _ags:
+            for _rec in RLSA_RECS:
+                _ul  = user_list_map.get(_rec["id"], {})
+                _sz  = _ul.get("search_size", 0)
+                _szs = f"{_sz/1000:.0f}K" if _sz >= 1000 else (str(_sz) if _sz else "—")
+                _adj = _rec["adj"]
+                _adjs = f"+{_adj}%" if _adj > 0 else f"{_adj}%"
+                _adjc = "badge-green" if _adj > 0 else "badge-red"
+                _rec_rows += f"""<tr>
+                  <td style="font-size:11px;color:var(--muted)">{_ag}</td>
+                  <td><strong style="font-size:12px">{_rec['name']}</strong><div style="font-size:10px;color:var(--muted)">{_rec['note']}</div></td>
+                  <td class="num" style="font-size:12px">{_szs}</td>
+                  <td><span class="badge {_adjc}" style="font-size:11px">{_adjs}</span></td>
+                  <td><span class="badge badge-blue" style="font-size:10px">{_rec['action'].title()}</span></td>
+                </tr>"""
+                rlsa_csv_rows.append([_c["name"], _ag, _rec["name"], _adjs, "Observation"])
+
+        rlsa_tab_html += f"""
+        <div class="pb-section" style="margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+            {_pb}
+            <strong style="font-size:14px">{_pn['label']}</strong>
+            {_rlsa_status}
+            <span style="margin-left:auto;color:var(--muted);font-size:11px">Target: <strong style="color:var(--text)">{_tg}</strong></span>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:8px 14px;margin-bottom:12px;font-size:12px">
+            Landing page: <a href="{_lp}" target="_blank" style="color:var(--accent)">{_lps}</a>
+          </div>
+          <div class="table-wrap" style="margin:0">
+            <table>
+              <thead><tr><th>Ad Group</th><th>Audience</th><th class="num">Search Size</th><th class="num">Bid Adj</th><th>Method</th></tr></thead>
+              <tbody>{_rec_rows}</tbody>
+            </table>
+          </div>
+        </div>"""
+
+    rlsa_csv_js    = to_csv_js(rlsa_csv_rows)
+    rlsa_row_count = len(rlsa_csv_rows) - 1
+
+    # ── Extensions tab HTML ────────────────────────────────────────────────────
+    camp_ext_asn    = assets.get("assignments", {})
+    existing_slinks = assets.get("sitelinks", [])
+
+    coverage_rows_html = ""
+    for _c in camp_order:
+        _pn  = parse_camp_name(_c["name"])
+        _pb  = f'<span class="badge {_pn["badge"]}" style="font-size:10px;margin-right:4px">{_pn["product"]}</span>'
+        _asn = camp_ext_asn.get(_c["name"], [])
+        _cells = ""
+        for _et in ("SITELINK", "CALLOUT", "STRUCTURED_SNIPPET"):
+            _ok = _et in _asn
+            _cells += f'<td style="text-align:center;font-size:16px">{"✅" if _ok else "❌"}</td>'
+        coverage_rows_html += f"<tr><td>{_pb}<strong>{_pn['label']}</strong></td>{_cells}</tr>\n"
+
+    stale_sl_html = ""
+    for _sl in existing_slinks[:20]:
+        _txt = _sl.get("link_text", "") or ""
+        _d1  = _sl.get("desc1", "")    or ""
+        _d2  = _sl.get("desc2", "")    or ""
+        _stale = any(ord(ch) > 127 for ch in (_txt + _d1 + _d2))
+        _nodescs = not (_d1 and _d2)
+        _tags = ""
+        if _stale:   _tags += '<span class="badge badge-red" style="font-size:10px;margin-right:4px">Non-EN</span>'
+        if _nodescs: _tags += '<span class="badge badge-yellow" style="font-size:10px">No descriptions</span>'
+        _status = _tags or '<span class="badge badge-green" style="font-size:10px">OK</span>'
+        stale_sl_html += (f"<tr><td><strong>{_txt}</strong></td>"
+                          f"<td style='font-size:11px;color:var(--muted)'>{_d1 or '—'}</td>"
+                          f"<td style='font-size:11px;color:var(--muted)'>{_d2 or '—'}</td>"
+                          f"<td>{_status}</td></tr>\n")
+
+    sl_csv_rows = [["Campaign", "Sitelink Text", "Description Line 1", "Description Line 2", "Final URL"]]
+    ca_csv_rows = [["Campaign", "Callout Text"]]
+    sn_csv_rows = [["Campaign", "Structured Snippet Header", "Structured Snippet Values"]]
+    ext_camp_html = ""
+
+    for _c in camp_order:
+        _pn   = parse_camp_name(_c["name"])
+        _pb   = f'<span class="badge {_pn["badge"]}" style="font-size:11px">{_pn["product"]}</span>'
+        _sls  = CAMP_SITELINKS.get(_c["name"], [])
+        _snip = CAMP_SNIPPETS.get(_c["name"])
+
+        _sl_rows = ""
+        for _sl_text, _sl_d1, _sl_d2, _sl_url in _sls:
+            _sl_short = _sl_url.replace("https://boost.space", "")
+            _sl_rows += (f"<tr><td><strong>{_sl_text}</strong></td>"
+                         f"<td style='font-size:11px;color:var(--muted)'>{_sl_d1}</td>"
+                         f"<td style='font-size:11px;color:var(--muted)'>{_sl_d2}</td>"
+                         f"<td style='font-size:11px'><a href='{_sl_url}' target='_blank' style='color:var(--accent)'>{_sl_short}</a></td></tr>\n")
+            sl_csv_rows.append([_c["name"], _sl_text, _sl_d1, _sl_d2, _sl_url])
+
+        for _ca in UNIVERSAL_CALLOUTS:
+            ca_csv_rows.append([_c["name"], _ca])
+        _ca_pills = " ".join(f'<span class="badge badge-blue" style="font-size:10px">{_ca}</span>' for _ca in UNIVERSAL_CALLOUTS)
+
+        _snip_html = ""
+        if _snip:
+            _sh, _sv = _snip
+            _v_pills = " ".join(f'<span class="badge badge-gray" style="font-size:10px">{_v}</span>' for _v in _sv.split(";"))
+            _snip_html = f'<div style="margin-top:8px"><span style="font-size:11px;color:var(--muted);margin-right:8px">📋 {_sh}:</span>{_v_pills}</div>'
+            sn_csv_rows.append([_c["name"], _sh, _sv.replace(";", ",")])
+
+        _sl_section = ""
+        if _sl_rows:
+            _sl_section = (f'<div style="margin-bottom:12px">'
+                           f'<div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:8px">🔗 Sitelinks</div>'
+                           f'<div class="table-wrap" style="margin:0"><table><thead><tr><th>Link Text</th><th>Desc 1</th><th>Desc 2</th><th>URL</th></tr></thead>'
+                           f'<tbody>{_sl_rows}</tbody></table></div></div>')
+
+        ext_camp_html += f"""
+        <div class="pb-section" style="margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">{_pb}<strong style="font-size:13px">{_pn['label']}</strong></div>
+          {_sl_section}
+          <div style="margin-bottom:12px">
+            <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:8px">📢 Callouts</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">{_ca_pills}</div>
+          </div>
+          {_snip_html}
+        </div>"""
+
+    sl_csv_js = to_csv_js(sl_csv_rows)
+    ca_csv_js = to_csv_js(ca_csv_rows)
+    sn_csv_js = to_csv_js(sn_csv_rows)
+    sl_row_count = len(sl_csv_rows) - 1
+    ca_row_count = len(ca_csv_rows) - 1
+    sn_row_count = len(sn_csv_rows) - 1
+
+    stale_sl_section = ""
+    if stale_sl_html:
+        stale_sl_section = (f'<div class="table-wrap" style="margin-bottom:24px">'
+                            f'<div class="table-header"><h3>Existing Sitelinks Audit</h3>'
+                            f'<span style="color:var(--muted);font-size:12px">{len(existing_slinks)} in account</span></div>'
+                            f'<table><thead><tr><th>Link Text</th><th>Desc 1</th><th>Desc 2</th><th>Status</th></tr></thead>'
+                            f'<tbody>{stale_sl_html}</tbody></table></div>')
+
     # ── Build final HTML ──────────────────────────────────────────────────────
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -713,10 +1130,15 @@ function restoreDoneStates(){{
 }}
 
 /* ── Google Ads CSV download data ───────────────────────────────────────── */
-var NEG_CAMP_CSV  = {neg_camp_csv_js};
-var NEG_ACCT_CSV  = {neg_acct_csv_js};
-var ADD_KW_CSV    = {add_kw_csv_js};
-var CAMP_ACT_CSV  = {camp_act_csv_js};
+var NEG_CAMP_CSV      = {neg_camp_csv_js};
+var NEG_ACCT_CSV      = {neg_acct_csv_js};
+var ADD_KW_CSV        = {add_kw_csv_js};
+var CAMP_ACT_CSV      = {camp_act_csv_js};
+var RLSA_CSV          = {rlsa_csv_js};
+var SITELINKS_CSV     = {sl_csv_js};
+var CALLOUTS_CSV      = {ca_csv_js};
+var SNIPPETS_CSV      = {sn_csv_js};
+var SHARED_NEG_DELTA  = {shared_neg_delta_csv_js};
 
 function downloadCSV(filename, data){{
   const BOM='\uFEFF';
