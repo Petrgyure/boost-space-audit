@@ -81,15 +81,15 @@ function restoreDoneStates(){
 }
 
 /* ── Google Ads CSV download data ───────────────────────────────────────── */
-var NEG_CAMP_CSV      = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai transformation\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai automations\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tools\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai use\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai bot\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tool\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tool box\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai agents with no boundaries\",\"Negative Exact\"";
-var NEG_ACCT_CSV      = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai agents with no boundaries\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai automations\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai bot\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tool\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tool box\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tools\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai transformation\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai use\",\"Negative Exact\"";
+var NEG_CAMP_CSV      = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai transformation\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai automations\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tools\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai use\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai bot\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tool\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai tool box\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai agents with no boundaries\",\"Negative Exact\"\n\"AI Agents - General\",\"\",\"Excluded negative keywords\",\"ai remote management app\",\"Negative Exact\"";
+var NEG_ACCT_CSV      = "\"Campaign\",\"Ad Group\",\"Account keyword type\",\"Keyword\",\"Criterion Type\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai agents with no boundaries\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai automations\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai bot\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai remote management app\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tool\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tool box\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai tools\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai transformation\",\"Negative Exact\"\n\"<account>\",\"\",\"Excluded negative keywords\",\"ai use\",\"Negative Exact\"";
 var ADD_KW_CSV        = "\"Campaign\",\"Ad Group\",\"Keyword\",\"Criterion Type\"\n\"AI Agents - General\",\"AI Automation Platform\",\"automation ai\",\"Exact\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"criador de chatbot gratuito\",\"Phrase\"";
-var CAMP_ACT_CSV      = "\"Campaign\",\"Vertical\",\"Use Case\",\"Action\",\"Reason\",\"30d Spend\",\"30d Conv\"\n\"AI Agents - General\",\"\",\"AI Agents - General\",\"Scale\",\"92 conv at \u20ac19 CPA\",\"\u20ac1,707\",\"92\"";
+var CAMP_ACT_CSV      = "\"Campaign\",\"Vertical\",\"Use Case\",\"Action\",\"Reason\",\"30d Spend\",\"30d Conv\"\n\"AI Agents - General\",\"\",\"AI Agents - General\",\"Scale\",\"85 conv at \u20ac19 CPA\",\"\u20ac1,626\",\"85\"";
 var RLSA_CSV          = "\"Campaign\",\"Ad Group\",\"Audience\",\"Bid Adjustment\",\"Target Method\"\n\"AI Agents - General\",\"AI Agent Automation\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Automation Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Orchestration\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Orchestration\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Orchestration\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Orchestration\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agent Orchestration\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agents for E-commerce\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Agents for E-commerce\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Agents for E-commerce\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Agents for E-commerce\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Agents for E-commerce\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Automation Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Automation Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Automation Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Automation Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Automation Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Classification\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Classification\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Classification\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Classification\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Classification\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Enrichment Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Enrichment Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Enrichment Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Enrichment Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Enrichment Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Readiness\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Readiness\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Readiness\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Readiness\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Readiness\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Transformation\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Transformation\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Transformation\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Transformation\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Transformation\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Validation\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Validation\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Validation\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Validation\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Data Validation\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Fields Database\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Fields Database\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Fields Database\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Fields Database\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Fields Database\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Ready Data\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"AI Ready Data\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"AI Ready Data\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"AI Ready Data\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"AI Ready Data\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Automation Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Automation Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Automation Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Automation Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Automation Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Deduplication\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Deduplication\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Deduplication\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Deduplication\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Deduplication\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Enrichment\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Enrichment\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Enrichment\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Enrichment\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Enrichment\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration & Unification\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration & Unification\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration & Unification\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration & Unification\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Orchestration & Unification\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Silo Elimination\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Silo Elimination\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Silo Elimination\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Silo Elimination\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Silo Elimination\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Unification Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data Unification Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data Unification Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data Unification Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data Unification Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data-Ready AI\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Data-Ready AI\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Data-Ready AI\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Data-Ready AI\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Data-Ready AI\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Database for AI Agents\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Database for AI Agents\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Database for AI Agents\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Database for AI Agents\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Database for AI Agents\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP Data Access\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"MCP Data Access\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"MCP Data Access\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"MCP Data Access\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP Data Access\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP Platform\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"MCP Platform\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"MCP Platform\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"MCP Platform\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP Platform\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP | Data Layer | Database\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"MCP | Data Layer | Database\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"MCP | Data Layer | Database\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"MCP | Data Layer | Database\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"MCP | Data Layer | Database\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"No-Code AI Agents\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"No-Code AI Agents\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"No-Code AI Agents\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"No-Code AI Agents\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"No-Code AI Agents\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Operational Data Layer\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Operational Data Layer\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Operational Data Layer\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Operational Data Layer\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Operational Data Layer\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Single Source of Truth\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Single Source of Truth\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Single Source of Truth\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Single Source of Truth\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Single Source of Truth\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Data Sync\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Data Sync\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Data Sync\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Data Sync\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Data Sync\",\"All Converters\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Sync\",\"all - 540\",\"+20%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Sync\",\"all - 7\",\"+40%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Sync\",\"AdWords optimized list\",\"+15%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Sync\",\"All Users of Boost.space Master\",\"-100%\",\"Observation\"\n\"AI Agents - General\",\"Two-Way Sync\",\"All Converters\",\"-100%\",\"Observation\"";
 var SITELINKS_CSV     = "\"Campaign\",\"Sitelink Text\",\"Description Line 1\",\"Description Line 2\",\"Final URL\"";
 var CALLOUTS_CSV      = "\"Campaign\",\"Callout Text\"\n\"AI Agents - General\",\"No-code setup\"\n\"AI Agents - General\",\"14-day free trial\"\n\"AI Agents - General\",\"GDPR compliant\"\n\"AI Agents - General\",\"EU data residency\"\n\"AI Agents - General\",\"SOC 2 certified\"\n\"AI Agents - General\",\"Live support\"\n\"AI Agents - General\",\"API access included\"\n\"AI Agents - General\",\"Free onboarding\"";
 var SNIPPETS_CSV      = "\"Campaign\",\"Structured Snippet Header\",\"Structured Snippet Values\"";
-var SHARED_NEG_DELTA  = "\"Shared Set Name\",\"Keyword\",\"Match Type\",\"Action\"\n\"Competitors + Irrelevant\",\"ai agents with no boundaries\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai automations\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai bot\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tool\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tool box\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tools\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai transformation\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai use\",\"Broad\",\"Add\"";
+var SHARED_NEG_DELTA  = "\"Shared Set Name\",\"Keyword\",\"Match Type\",\"Action\"\n\"Competitors + Irrelevant\",\"ai agents with no boundaries\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai automations\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai bot\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai remote management app\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tool\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tool box\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai tools\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai transformation\",\"Broad\",\"Add\"\n\"Competitors + Irrelevant\",\"ai use\",\"Broad\",\"Add\"";
 
 function downloadCSV(filename, data){
   const BOM='﻿';
@@ -206,7 +206,7 @@ function downloadCSV(filename, data){
 <div class="header">
   <div class="header-left">
     <h1>Boost.space — Google Ads Audit</h1>
-    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-05-11 08:28 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
+    <p>Account 205-889-7291 &nbsp;·&nbsp; Generated 2026-05-12 07:47 UTC &nbsp;·&nbsp; Last 30 days &nbsp;·&nbsp; 1 EUR = 24.45 CZK</p>
   </div>
   <div class="header-right">
     <div style="text-align:center">
@@ -214,8 +214,8 @@ function downloadCSV(filename, data){
       <div id="refresh-status" class="refresh-status"></div>
     </div>
     <div class="score-badge">
-      <div class="score">75</div>
-      <div class="grade">Health / B</div>
+      <div class="score">74</div>
+      <div class="grade">Health / C</div>
     </div>
   </div>
 </div>
@@ -232,10 +232,10 @@ function downloadCSV(filename, data){
 <!-- DASHBOARD -->
 <div id="tab-dashboard" class="tab-content active">
   <div class="grid-4">
-    <div class="card"><div class="card-title">Active Monthly Spend</div><div class="card-value text-red">€1,707</div><div class="card-sub">1 campaigns active</div></div>
-    <div class="card"><div class="card-title">Google Ads Conversions</div><div class="card-value text-red">92</div><div class="card-sub">Reported in last 30 days</div></div>
-    <div class="card"><div class="card-title">PostHog Paid Convs</div><div class="card-value text-yellow">554</div><div class="card-sub">Micro-convs with GCLID present</div></div>
-    <div class="card"><div class="card-title">Paid Bounce Rate</div><div class="card-value text-red">74%</div><div class="card-sub">Avg 1.3 pages/session</div></div>
+    <div class="card"><div class="card-title">Active Monthly Spend</div><div class="card-value text-red">€1,626</div><div class="card-sub">1 campaigns active</div></div>
+    <div class="card"><div class="card-title">Google Ads Conversions</div><div class="card-value text-red">85</div><div class="card-sub">Reported in last 30 days</div></div>
+    <div class="card"><div class="card-title">PostHog Paid Convs</div><div class="card-value text-yellow">516</div><div class="card-sub">Micro-convs with GCLID present</div></div>
+    <div class="card"><div class="card-title">Paid Bounce Rate</div><div class="card-value text-red">73%</div><div class="card-sub">Avg 1.4 pages/session</div></div>
   </div>
   <div class="section-title">Score Breakdown</div>
   <div class="grid-2">
@@ -245,8 +245,8 @@ function downloadCSV(filename, data){
           <div class="bar-wrap"><div class="bar-fill bar-yellow" style="width:40%"></div></div>
         </div>
       <div style="margin-bottom:16px">
-          <div class="hbar-label"><span>Wasted Spend Control</span><span class="text-green">20/20</span></div>
-          <div class="bar-wrap"><div class="bar-fill bar-green" style="width:100%"></div></div>
+          <div class="hbar-label"><span>Wasted Spend Control</span><span class="text-green">19/20</span></div>
+          <div class="bar-wrap"><div class="bar-fill bar-green" style="width:95%"></div></div>
         </div>
       <div style="margin-bottom:16px">
           <div class="hbar-label"><span>Account Structure</span><span class="text-green">15/15</span></div>
@@ -272,14 +272,14 @@ function downloadCSV(filename, data){
   <div class="alert alert-critical">
     <div class="alert-icon">🔴</div>
     <div class="alert-body">
-      <strong>~€83 / month on competitors &amp; irrelevant terms</strong>
+      <strong>~€87 / month on competitors &amp; irrelevant terms</strong>
       <p>Top terms: </p>
     </div>
   </div>
   <div class="alert alert-critical">
     <div class="alert-icon">🔴</div>
     <div class="alert-body">
-      <strong>515 high-value conversions in PostHog — 0 attributed to paid</strong>
+      <strong>516 high-value conversions in PostHog — 0 attributed to paid</strong>
       <p>GCLID not persisted across sessions. Deploy 90-day GCLID cookie to recover attribution on demo &amp; lead events.</p>
     </div>
   </div>
@@ -295,15 +295,15 @@ function downloadCSV(filename, data){
 <tr>
           <td><strong>AI Agents - General</strong><div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
           <td><span class="badge badge-blue">Search</span></td>
-          <td class="num">15,318</td>
-          <td class="num">1,263</td>
-          <td class="num">8.25%</td>
-          <td class="num"><strong>€1,707</strong></td>
-          <td class="num">€1.35</td>
-          <td class="num">92.0</td>
+          <td class="num">14,438</td>
+          <td class="num">1,183</td>
+          <td class="num">8.19%</td>
+          <td class="num"><strong>€1,626</strong></td>
+          <td class="num">€1.37</td>
+          <td class="num">85.0</td>
           <td class="num ">€19</td>
           <td class="num">10.0%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:10.0%"></div></div></td>
-          <td class="num">59.7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:59.7%"></div></div></td>
+          <td class="num">61.1%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:61.1%"></div></div></td>
           <td><span class="badge badge-yellow">Scale</span></td>
         </tr>
 </tbody>
@@ -336,20 +336,8 @@ function downloadCSV(filename, data){
           <td class="num">€73</td>
           <td class="num">64</td>
           <td class="num">€1.14</td>
-          <td class="num">52.46%</td>
+          <td class="num">53.33%</td>
           <td class="num">3.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-green">Keep</span></td>
-        </tr>
-<tr>
-          <td><strong>flow ai</strong></td>
-          <td><span style="font-size:11px">AI Agents - General</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€47</td>
-          <td class="num">44</td>
-          <td class="num">€1.06</td>
-          <td class="num">16.3%</td>
-          <td class="num">4.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -366,13 +354,25 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
+          <td><strong>flow ai</strong></td>
+          <td><span style="font-size:11px">AI Agents - General</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€34</td>
+          <td class="num">28</td>
+          <td class="num">€1.21</td>
+          <td class="num">17.5%</td>
+          <td class="num">4.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
+        </tr>
+<tr>
           <td><strong>automation ai</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Automation Platform</span></td>
           <td class="num">€32</td>
           <td class="num">21</td>
           <td class="num">€1.53</td>
-          <td class="num">43.75%</td>
+          <td class="num">42.0%</td>
           <td class="num">2.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -393,10 +393,10 @@ function downloadCSV(filename, data){
           <td><strong>create ai bot</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
           <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Database for AI Agents</span></td>
-          <td class="num">€22</td>
-          <td class="num">12</td>
-          <td class="num">€1.80</td>
-          <td class="num">70.59%</td>
+          <td class="num">€20</td>
+          <td class="num">11</td>
+          <td class="num">€1.84</td>
+          <td class="num">73.33%</td>
           <td class="num">2.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -408,7 +408,7 @@ function downloadCSV(filename, data){
           <td class="num">€19</td>
           <td class="num">13</td>
           <td class="num">€1.44</td>
-          <td class="num">7.74%</td>
+          <td class="num">8.18%</td>
           <td class="num">2.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -444,7 +444,7 @@ function downloadCSV(filename, data){
           <td class="num">€15</td>
           <td class="num">10</td>
           <td class="num">€1.49</td>
-          <td class="num">4.83%</td>
+          <td class="num">5.05%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -456,7 +456,7 @@ function downloadCSV(filename, data){
           <td class="num">€14</td>
           <td class="num">7</td>
           <td class="num">€2.02</td>
-          <td class="num">10.77%</td>
+          <td class="num">12.73%</td>
           <td class="num">2.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -480,7 +480,7 @@ function downloadCSV(filename, data){
           <td class="num">€13</td>
           <td class="num">5</td>
           <td class="num">€2.62</td>
-          <td class="num">4.31%</td>
+          <td class="num">4.67%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -489,11 +489,11 @@ function downloadCSV(filename, data){
           <td><strong>google flow</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€12</td>
-          <td class="num">8</td>
-          <td class="num">€1.44</td>
-          <td class="num">6.25%</td>
-          <td class="num">2.0</td>
+          <td class="num">€11</td>
+          <td class="num">7</td>
+          <td class="num">€1.51</td>
+          <td class="num">5.83%</td>
+          <td class="num">1.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
         </tr>
@@ -504,7 +504,7 @@ function downloadCSV(filename, data){
           <td class="num">€10</td>
           <td class="num">4</td>
           <td class="num">€2.62</td>
-          <td class="num">2.65%</td>
+          <td class="num">2.7%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -517,18 +517,6 @@ function downloadCSV(filename, data){
           <td class="num">7</td>
           <td class="num">€1.48</td>
           <td class="num">41.18%</td>
-          <td class="num">0.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-yellow">Keep</span></td>
-        </tr>
-<tr>
-          <td><strong>flow ai</strong></td>
-          <td><span style="font-size:11px">AI Agents - General</span></td>
-          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">AI Ready Data</span></td>
-          <td class="num">€9.57</td>
-          <td class="num">8</td>
-          <td class="num">€1.20</td>
-          <td class="num">7.41%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -552,7 +540,7 @@ function downloadCSV(filename, data){
           <td class="num">€9.09</td>
           <td class="num">5</td>
           <td class="num">€1.82</td>
-          <td class="num">13.16%</td>
+          <td class="num">13.51%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-red">IRRELEVANT</span></td>
           <td><span class="badge badge-red">→ Negative</span></td>
@@ -612,7 +600,7 @@ function downloadCSV(filename, data){
           <td class="num">€8.13</td>
           <td class="num">5</td>
           <td class="num">€1.63</td>
-          <td class="num">4.5%</td>
+          <td class="num">4.67%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -630,13 +618,13 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-yellow">Keep</span></td>
         </tr>
 <tr>
-          <td><strong>flutterflow</strong></td>
+          <td><strong>flow ai</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€7.99</td>
-          <td class="num">2</td>
-          <td class="num">€4.00</td>
-          <td class="num">7.14%</td>
+          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">AI Ready Data</span></td>
+          <td class="num">€7.92</td>
+          <td class="num">7</td>
+          <td class="num">€1.13</td>
+          <td class="num">7.37%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -678,18 +666,6 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-yellow">Keep</span></td>
         </tr>
 <tr>
-          <td><strong>runable</strong></td>
-          <td><span style="font-size:11px">AI Agents - General</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€7.45</td>
-          <td class="num">4</td>
-          <td class="num">€1.86</td>
-          <td class="num">3.67%</td>
-          <td class="num">2.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-green">Keep</span></td>
-        </tr>
-<tr>
           <td><strong>loveable ai</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
@@ -709,18 +685,6 @@ function downloadCSV(filename, data){
           <td class="num">7</td>
           <td class="num">€0.99</td>
           <td class="num">43.75%</td>
-          <td class="num">0.0</td>
-          <td><span class="badge badge-blue">TOFU</span></td>
-          <td><span class="badge badge-yellow">Keep</span></td>
-        </tr>
-<tr>
-          <td><strong>cloud ai</strong></td>
-          <td><span style="font-size:11px">AI Agents - General</span></td>
-          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€6.87</td>
-          <td class="num">6</td>
-          <td class="num">€1.15</td>
-          <td class="num">8.33%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -756,7 +720,7 @@ function downloadCSV(filename, data){
           <td class="num">€6.76</td>
           <td class="num">3</td>
           <td class="num">€2.25</td>
-          <td class="num">6.25%</td>
+          <td class="num">6.38%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -768,7 +732,7 @@ function downloadCSV(filename, data){
           <td class="num">€6.72</td>
           <td class="num">3</td>
           <td class="num">€2.24</td>
-          <td class="num">5.26%</td>
+          <td class="num">5.77%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -792,7 +756,7 @@ function downloadCSV(filename, data){
           <td class="num">€6.33</td>
           <td class="num">3</td>
           <td class="num">€2.11</td>
-          <td class="num">13.64%</td>
+          <td class="num">14.29%</td>
           <td class="num">1.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-green">Keep</span></td>
@@ -822,16 +786,28 @@ function downloadCSV(filename, data){
           <td><span class="badge badge-yellow">Keep</span></td>
         </tr>
 <tr>
-          <td><strong>minimaxagent</strong></td>
+          <td><strong>cloud ai</strong></td>
           <td><span style="font-size:11px">AI Agents - General</span></td>
           <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
-          <td class="num">€5.93</td>
-          <td class="num">2</td>
-          <td class="num">€2.96</td>
-          <td class="num">100.0%</td>
+          <td class="num">€6.01</td>
+          <td class="num">5</td>
+          <td class="num">€1.20</td>
+          <td class="num">7.14%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
+        </tr>
+<tr>
+          <td><strong>runable</strong></td>
+          <td><span style="font-size:11px">AI Agents - General</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€5.83</td>
+          <td class="num">3</td>
+          <td class="num">€1.94</td>
+          <td class="num">3.12%</td>
+          <td class="num">1.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
         </tr>
 <tr>
           <td><strong>real time ai</strong></td>
@@ -876,7 +852,7 @@ function downloadCSV(filename, data){
           <td class="num">€5.47</td>
           <td class="num">4</td>
           <td class="num">€1.37</td>
-          <td class="num">7.55%</td>
+          <td class="num">7.84%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -888,7 +864,7 @@ function downloadCSV(filename, data){
           <td class="num">€5.39</td>
           <td class="num">4</td>
           <td class="num">€1.35</td>
-          <td class="num">57.14%</td>
+          <td class="num">66.67%</td>
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
@@ -916,6 +892,30 @@ function downloadCSV(filename, data){
           <td class="num">0.0</td>
           <td><span class="badge badge-blue">TOFU</span></td>
           <td><span class="badge badge-yellow">Keep</span></td>
+        </tr>
+<tr>
+          <td><strong>motion ai</strong></td>
+          <td><span style="font-size:11px">AI Agents - General</span></td>
+          <td><span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span> <span style="font-size:11px;color:var(--muted)">AI Agent Automation Platform</span></td>
+          <td class="num">€4.94</td>
+          <td class="num">4</td>
+          <td class="num">€1.23</td>
+          <td class="num">36.36%</td>
+          <td class="num">2.0</td>
+          <td><span class="badge badge-blue">TOFU</span></td>
+          <td><span class="badge badge-green">Keep</span></td>
+        </tr>
+<tr>
+          <td><strong>different ai tools</strong></td>
+          <td><span style="font-size:11px">AI Agents - General</span></td>
+          <td><span class="badge badge-blue tofu" style="font-size:10px">TOFU</span> <span style="font-size:11px;color:var(--muted)">Database for AI Agents</span></td>
+          <td class="num">€4.87</td>
+          <td class="num">2</td>
+          <td class="num">€2.44</td>
+          <td class="num">200.0%</td>
+          <td class="num">0.0</td>
+          <td><span class="badge badge-yellow">MOFU</span></td>
+          <td><span class="badge badge-yellow">Keep</span></td>
         </tr></tbody>
     </table>
   </div>
@@ -929,7 +929,7 @@ function downloadCSV(filename, data){
             <div class="table-wrap" style="margin-bottom:20px">
               <div class="table-header">
                 <h3><span class="badge badge-gray" style="margin-right:6px;font-size:11px">Other</span>AI Agents - General</h3>
-                <span style="color:var(--muted);font-size:12px">1663 keywords · €95 spend · 3 conv</span>
+                <span style="color:var(--muted);font-size:12px">1663 keywords · €98 spend · 3 conv</span>
               </div>
               
                 <div style="margin-bottom:12px">
@@ -1236,7 +1236,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Agents for E-commerce</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">15 kws · €6.82 · 0 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">15 kws · €8.02 · 0 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -1253,8 +1253,8 @@ function downloadCSV(filename, data){
                       <td>ai for business automation</td>
                       <td><span class="badge badge-green">EXA</span></td>
                       <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€2.42</td>
-                      <td class="num">1</td>
+                      <td class="num">€3.62</td>
+                      <td class="num">2</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -1381,7 +1381,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-yellow mofu" style="font-size:10px">MOFU</span>
                     <span style="font-size:12px;font-weight:600">AI Automation Platform</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €65 · 2 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">14 kws · €70 · 2 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -1409,6 +1409,15 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€11</td>
                       <td class="num">7</td>
+                      <td class="num">0.0</td>
+                      <td><span class="badge badge-blue tofu">TOFU</span></td>
+                    </tr>
+<tr>
+                      <td>automate business workflows ai</td>
+                      <td><span class="badge badge-green">EXA</span></td>
+                      <td><span class="badge badge-gray">—</span></td>
+                      <td class="num">€4.83</td>
+                      <td class="num">1</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -1501,15 +1510,6 @@ function downloadCSV(filename, data){
                       <td class="num">0</td>
                       <td class="num">0.0</td>
                       <td><span class="badge badge-yellow mofu">MOFU</span></td>
-                    </tr>
-<tr>
-                      <td>automate business workflows ai</td>
-                      <td><span class="badge badge-green">EXA</span></td>
-                      <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€0.00</td>
-                      <td class="num">0</td>
-                      <td class="num">0.0</td>
-                      <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr></tbody>
                   </table>
                 </div>
@@ -2623,7 +2623,7 @@ function downloadCSV(filename, data){
                   <div style="padding:8px 12px;background:var(--bg3);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
                     <span class="badge badge-blue tofu" style="font-size:10px">TOFU</span>
                     <span style="font-size:12px;font-weight:600">Data Deduplication</span>
-                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €12 · 1 conv</span>
+                    <span style="color:var(--muted);font-size:11px;margin-left:auto">20 kws · €9.34 · 1 conv</span>
                   </div>
                   <table>
                     <thead><tr><th>Keyword</th><th>Match</th><th>QS</th><th class="num">Cost</th><th class="num">Clicks</th><th class="num">Conv.</th><th>Funnel</th></tr></thead>
@@ -2631,8 +2631,8 @@ function downloadCSV(filename, data){
                       <td>remove duplicate data</td>
                       <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-yellow">2</span></td>
-                      <td class="num">€12</td>
-                      <td class="num">6</td>
+                      <td class="num">€9.34</td>
+                      <td class="num">5</td>
                       <td class="num">1.0</td>
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
@@ -4034,7 +4034,7 @@ function downloadCSV(filename, data){
                     </tr>
 <tr>
                       <td>enterprise data layer</td>
-                      <td><span class="badge badge-green">EXA</span></td>
+                      <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€0.00</td>
                       <td class="num">0</td>
@@ -4051,8 +4051,8 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
 <tr>
-                      <td>operational data layer</td>
-                      <td><span class="badge badge-green">EXA</span></td>
+                      <td>ai data infrastructure</td>
+                      <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€0.00</td>
                       <td class="num">0</td>
@@ -4060,8 +4060,8 @@ function downloadCSV(filename, data){
                       <td><span class="badge badge-blue tofu">TOFU</span></td>
                     </tr>
 <tr>
-                      <td>ai data infrastructure</td>
-                      <td><span class="badge badge-green">EXA</span></td>
+                      <td>operational data layer</td>
+                      <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€0.00</td>
                       <td class="num">0</td>
@@ -4097,25 +4097,7 @@ function downloadCSV(filename, data){
                     </tr>
 <tr>
                       <td>database for ai agents</td>
-                      <td><span class="badge badge-green">EXA</span></td>
-                      <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€0.00</td>
-                      <td class="num">0</td>
-                      <td class="num">0.0</td>
-                      <td><span class="badge badge-blue tofu">TOFU</span></td>
-                    </tr>
-<tr>
-                      <td>mcp for ecommerce</td>
-                      <td><span class="badge badge-green">EXA</span></td>
-                      <td><span class="badge badge-gray">—</span></td>
-                      <td class="num">€0.00</td>
-                      <td class="num">0</td>
-                      <td class="num">0.0</td>
-                      <td><span class="badge badge-blue tofu">TOFU</span></td>
-                    </tr>
-<tr>
-                      <td>managed mcp server</td>
-                      <td><span class="badge badge-green">EXA</span></td>
+                      <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€0.00</td>
                       <td class="num">0</td>
@@ -4124,7 +4106,25 @@ function downloadCSV(filename, data){
                     </tr>
 <tr>
                       <td>mcp for enterprise</td>
-                      <td><span class="badge badge-green">EXA</span></td>
+                      <td><span class="badge badge-purple">PHR</span></td>
+                      <td><span class="badge badge-gray">—</span></td>
+                      <td class="num">€0.00</td>
+                      <td class="num">0</td>
+                      <td class="num">0.0</td>
+                      <td><span class="badge badge-blue tofu">TOFU</span></td>
+                    </tr>
+<tr>
+                      <td>managed mcp server</td>
+                      <td><span class="badge badge-purple">PHR</span></td>
+                      <td><span class="badge badge-gray">—</span></td>
+                      <td class="num">€0.00</td>
+                      <td class="num">0</td>
+                      <td class="num">0.0</td>
+                      <td><span class="badge badge-blue tofu">TOFU</span></td>
+                    </tr>
+<tr>
+                      <td>mcp for ecommerce</td>
+                      <td><span class="badge badge-purple">PHR</span></td>
                       <td><span class="badge badge-gray">—</span></td>
                       <td class="num">€0.00</td>
                       <td class="num">0</td>
@@ -4785,8 +4785,8 @@ function downloadCSV(filename, data){
   <div class="section-title">PostHog — Paid Visitor Behaviour (GCLID, 30 days)</div>
   <div class="grid-4">
     <div class="card"><div class="card-title">Sessions w/ GCLID</div><div class="card-value">100</div></div>
-    <div class="card"><div class="card-title">Bounce Rate</div><div class="card-value text-red">74%</div></div>
-    <div class="card"><div class="card-title">Avg Pages / Session</div><div class="card-value text-yellow">1.3</div></div>
+    <div class="card"><div class="card-title">Bounce Rate</div><div class="card-value text-red">73%</div></div>
+    <div class="card"><div class="card-title">Avg Pages / Session</div><div class="card-value text-yellow">1.4</div></div>
     <div class="card"><div class="card-title">High-Value Convs (Paid)</div><div class="card-value text-red">0</div><div class="card-sub">GCLID not persisted across sessions</div></div>
   </div>
   <div class="grid-2">
@@ -4795,55 +4795,51 @@ function downloadCSV(filename, data){
       <div style="padding:12px 16px"><div class="funnel-row">
           <div class="funnel-page">/data-layer</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:100%"></div></div></div>
-          <div class="funnel-visits">1278</div>
+          <div class="funnel-visits">1229</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/mcp</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:84%"></div></div></div>
-          <div class="funnel-visits">1079</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:83%"></div></div></div>
+          <div class="funnel-visits">1022</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/signup</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:55%"></div></div></div>
-          <div class="funnel-visits">703</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:53%"></div></div></div>
+          <div class="funnel-visits">663</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/solutions/database-for-make</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:29%"></div></div></div>
-          <div class="funnel-visits">373</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:30%"></div></div></div>
+          <div class="funnel-visits">372</div>
+        </div><div class="funnel-row">
+          <div class="funnel-page">/solutions/commerce/dynamic-pricing</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:25%"></div></div></div>
+          <div class="funnel-visits">312</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/install</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:25%"></div></div></div>
-          <div class="funnel-visits">331</div>
-        </div><div class="funnel-row">
-          <div class="funnel-page">/solutions/commerce/dynamic-pricing</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:24%"></div></div></div>
-          <div class="funnel-visits">319</div>
+          <div class="funnel-visits">310</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:8%"></div></div></div>
-          <div class="funnel-visits">112</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:9%"></div></div></div>
+          <div class="funnel-visits">111</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/solutions/commerce/geo-ai-catalog-optimization</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:8%"></div></div></div>
-          <div class="funnel-visits">105</div>
+          <div class="funnel-visits">102</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/pricing</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:5%"></div></div></div>
-          <div class="funnel-visits">74</div>
+          <div class="funnel-visits">73</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/contact-sales</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:2%"></div></div></div>
-          <div class="funnel-visits">38</div>
+          <div class="funnel-visits">36</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/solutions/marketing/real-time-revenue-attribution</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:1%"></div></div></div>
-          <div class="funnel-visits">24</div>
+          <div class="funnel-visits">19</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/ai-data-enrichment</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:1%"></div></div></div>
           <div class="funnel-visits">19</div>
-        </div><div class="funnel-row">
-          <div class="funnel-page">/solutions/commerce/supplier-catalog-automation</div>
-          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:1%"></div></div></div>
-          <div class="funnel-visits">16</div>
         </div><div class="funnel-row">
           <div class="funnel-page">/solutions/marketing/dynamic-segmentation</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:0%"></div></div></div>
@@ -4852,26 +4848,30 @@ function downloadCSV(filename, data){
           <div class="funnel-page">/solutions/marketing</div>
           <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:0%"></div></div></div>
           <div class="funnel-visits">9</div>
+        </div><div class="funnel-row">
+          <div class="funnel-page">/blog/mcp</div>
+          <div class="funnel-bar-wrap"><div class="bar-wrap"><div class="bar-fill bar-purple" style="width:0%"></div></div></div>
+          <div class="funnel-visits">9</div>
         </div></div>
     </div>
     <div class="card">
       <div class="card-title" style="margin-bottom:12px">Conversion Events — Paid vs Total</div>
       <div class="budget-row">
           <div class="budget-label ">select_starting_signup_point ✅</div>
-          <div class="budget-val"><strong >323</strong>
-            <span class="text-muted"> / 700 total (46.1%)</span></div>
+          <div class="budget-val"><strong >301</strong>
+            <span class="text-muted"> / 680 total (44.3%)</span></div>
         </div><div class="budget-row">
           <div class="budget-label ">form_submit ✅</div>
-          <div class="budget-val"><strong >231</strong>
-            <span class="text-muted"> / 523 total (44.2%)</span></div>
+          <div class="budget-val"><strong >215</strong>
+            <span class="text-muted"> / 518 total (41.5%)</span></div>
         </div><div class="budget-row">
           <div class="budget-label text-red">leady_new_lead ❌</div>
           <div class="budget-val"><strong class="text-red">0</strong>
-            <span class="text-muted"> / 455 total (0.0%)</span></div>
+            <span class="text-muted"> / 464 total (0.0%)</span></div>
         </div><div class="budget-row">
           <div class="budget-label text-red">be_form_submit_demo_lead ❌</div>
           <div class="budget-val"><strong class="text-red">0</strong>
-            <span class="text-muted"> / 60 total (0.0%)</span></div>
+            <span class="text-muted"> / 52 total (0.0%)</span></div>
         </div>
       <div class="insight" style="margin-top:16px">
         <h4>🔑 GCLID Persistence Gap</h4>
@@ -4920,8 +4920,8 @@ function downloadCSV(filename, data){
         <p>Competitor &amp; irrelevant search terms wasting budget. Export CSV → Google Ads → Tools → Bulk Actions → Upload.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;min-width:200px">
-        <button class="copy-btn" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="downloadCSV('negatives_campaign_level.csv', NEG_CAMP_CSV)">⬇ Campaign-Level CSV (8 rows)</button>
-        <button class="copy-btn" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="downloadCSV('negatives_account_level.csv', NEG_ACCT_CSV)">⬇ Account-Level CSV (8 rows)</button>
+        <button class="copy-btn" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="downloadCSV('negatives_campaign_level.csv', NEG_CAMP_CSV)">⬇ Campaign-Level CSV (9 rows)</button>
+        <button class="copy-btn" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="downloadCSV('negatives_account_level.csv', NEG_ACCT_CSV)">⬇ Account-Level CSV (9 rows)</button>
         <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.4">Campaign-level = per campaign<br>Account-level = blocks all campaigns</div>
       </div>
     </div>
@@ -4931,12 +4931,13 @@ function downloadCSV(filename, data){
     </div>
     <div class="pb-neg-block">
           <div class="pb-neg-header">
-            <span><strong>AI Agents - General</strong> &nbsp;<span class="badge badge-red" style="font-size:10px">8 irrelevant</span></span>
-            <button class="copy-btn" onclick="copyEl('neg-0', this)">📋 Copy 8 terms</button>
+            <span><strong>AI Agents - General</strong> &nbsp;<span class="badge badge-red" style="font-size:10px">9 irrelevant</span></span>
+            <button class="copy-btn" onclick="copyEl('neg-0', this)">📋 Copy 9 terms</button>
           </div>
           <textarea id="neg-0" class="neg-textarea" readonly>[ai agents with no boundaries]
 [ai automations]
 [ai bot]
+[ai remote management app]
 [ai tool]
 [ai tool box]
 [ai tools]
@@ -4946,11 +4947,12 @@ function downloadCSV(filename, data){
     <div class="neg-master-block">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <strong style="font-size:13px">Copy list (text)</strong>
-        <span style="color:var(--muted);font-size:12px">8 unique terms · exact match</span>
+        <span style="color:var(--muted);font-size:12px">9 unique terms · exact match</span>
       </div>
       <textarea id="neg-master" class="neg-textarea" style="min-height:140px" readonly>[ai agents with no boundaries]
 [ai automations]
 [ai bot]
+[ai remote management app]
 [ai tool]
 [ai tool box]
 [ai tools]
@@ -4979,9 +4981,9 @@ function downloadCSV(filename, data){
           <td><strong>AI Agents - General</strong>
             <div style="font-size:10px;color:var(--muted);margin-top:2px"></div></td>
           <td><span class="badge badge-green">Scale</span></td>
-          <td style="color:var(--muted);font-size:12px">92 conversions at €19 CPA — increase daily budget</td>
-          <td class="num" style="white-space:nowrap">€1,707</td>
-          <td class="num">92</td>
+          <td style="color:var(--muted);font-size:12px">85 conversions at €19 CPA — increase daily budget</td>
+          <td class="num" style="white-space:nowrap">€1,626</td>
+          <td class="num">85</td>
         </tr></tbody>
       </table>
     </div>
